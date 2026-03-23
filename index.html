@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BioQuiz — UPSC Biotechnology Practice</title>
+<title>GS Practice Platform by Gaurav Karn</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0D1117; --card: #161B22; --card2: #1C2128; --card3: #21262D;
-  --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.04);
-  --green: #3FB950; --green-dim: rgba(63,185,80,0.12);
-  --red: #F85149; --red-dim: rgba(248,81,73,0.12);
-  --blue: #58A6FF; --blue-dim: rgba(88,166,255,0.12);
-  --yellow: #E3B341; --yellow-dim: rgba(227,179,65,0.12);
-  --purple: #BC8CFF; --purple-dim: rgba(188,140,255,0.12);
-  --text: #E6EDF3; --text2: #8B949E; --text3: #3D444D;
+  --bg: #090E18; --card: #0F1623; --card2: #161E2E; --card3: #1C2538;
+  --border: rgba(255,255,255,0.09); --border2: rgba(255,255,255,0.04);
+  --green: #2ECC71; --green-dim: rgba(46,204,113,0.12);
+  --red: #E74C3C; --red-dim: rgba(231,76,60,0.12);
+  --blue: #3B82F6; --blue-dim: rgba(59,130,246,0.12);
+  --yellow: #F59E0B; --yellow-dim: rgba(245,158,11,0.12);
+  --purple: #A78BFA; --purple-dim: rgba(167,139,250,0.12);
+  --accent: #6366F1; --accent-dim: rgba(99,102,241,0.12);
+  --text: #F0F4FF; --text2: #8B96B0; --text3: #3D4A65;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -23,8 +24,9 @@ body { background: var(--bg); min-height: 100vh; font-family: 'Sora', sans-serif
 /* GLOW BG */
 body::before {
   content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse at 15% 15%, rgba(88,166,255,0.05) 0%, transparent 55%),
-              radial-gradient(ellipse at 85% 85%, rgba(63,185,80,0.04) 0%, transparent 55%);
+  background: radial-gradient(ellipse at 15% 15%, rgba(99,102,241,0.07) 0%, transparent 55%),
+              radial-gradient(ellipse at 85% 85%, rgba(46,204,113,0.05) 0%, transparent 55%),
+              radial-gradient(ellipse at 50% 100%, rgba(59,130,246,0.04) 0%, transparent 50%);
 }
 
 /* ── SCREENS ── */
@@ -46,7 +48,7 @@ body::before {
 .auth-logo { text-align: center; margin-bottom: 28px; }
 .auth-logo-icon {
   width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 12px;
-  background: linear-gradient(135deg, #58A6FF, #3FB950);
+  background: linear-gradient(135deg, #6366F1, #3B82F6);
   display: flex; align-items: center; justify-content: center; font-size: 24px;
 }
 .auth-logo-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; }
@@ -74,12 +76,12 @@ body::before {
 
 .auth-btn {
   width: 100%; padding: 13px; border-radius: 10px; border: none;
-  background: linear-gradient(135deg, #58A6FF, #3FB950);
-  color: #0D1117; font-size: 14px; font-weight: 700;
+  background: linear-gradient(135deg, #6366F1, #3B82F6);
+  color: #fff; font-size: 14px; font-weight: 700;
   cursor: pointer; transition: all .2s; margin-top: 4px;
   font-family: 'Sora', sans-serif;
 }
-.auth-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(88,166,255,0.3); }
+.auth-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99,102,241,0.4); }
 .auth-msg { font-size: 12px; text-align: center; margin-top: 12px; min-height: 18px; }
 .auth-msg.error { color: var(--red); }
 .auth-msg.success { color: var(--green); }
@@ -111,9 +113,9 @@ nav {
 }
 .nav-avatar {
   width: 24px; height: 24px; border-radius: 50%;
-  background: linear-gradient(135deg, #58A6FF, #3FB950);
+  background: linear-gradient(135deg, #6366F1, #3B82F6);
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: #0D1117;
+  font-size: 11px; font-weight: 700; color: #fff;
 }
 .nav-uname { font-size: 12px; font-weight: 600; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .logout-btn { background: transparent; color: var(--text3); border: none; font-size: 11px; cursor: pointer; padding: 2px 6px; border-radius: 4px; transition: color .2s; font-family: 'Sora', sans-serif; }
@@ -125,8 +127,8 @@ nav {
 
 /* ══════ HOME TAB ══════ */
 .home-banner {
-  background: linear-gradient(135deg, rgba(88,166,255,0.1), rgba(63,185,80,0.08));
-  border: 1px solid rgba(88,166,255,0.2); border-radius: 16px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(59,130,246,0.08));
+  border: 1px solid rgba(99,102,241,0.25); border-radius: 16px;
   padding: 24px; margin-bottom: 24px;
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
@@ -174,12 +176,12 @@ nav {
 
 .start-quiz-btn {
   width: 100%; padding: 14px; border-radius: 12px; border: none;
-  background: linear-gradient(135deg, #58A6FF, #3FB950);
-  color: #0D1117; font-size: 15px; font-weight: 800;
+  background: linear-gradient(135deg, #6366F1, #3B82F6);
+  color: #fff; font-size: 15px; font-weight: 800;
   cursor: pointer; transition: all .2s; letter-spacing: -0.2px;
   font-family: 'Sora', sans-serif;
 }
-.start-quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(88,166,255,0.35); }
+.start-quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,102,241,0.4); }
 .start-quiz-btn:disabled { opacity: .3; cursor: not-allowed; transform: none !important; box-shadow: none; }
 
 /* ══════ QUIZ TAB ══════ */
@@ -216,7 +218,7 @@ nav {
 .expl-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
 
 .act-row { display: flex; gap: 10px; }
-.btn-check { flex: 1; padding: 12px; border-radius: 10px; border: none; background: linear-gradient(135deg,#58A6FF,#3FB950); color: #0D1117; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora',sans-serif; transition: opacity .2s; }
+.btn-check { flex: 1; padding: 12px; border-radius: 10px; border: none; background: linear-gradient(135deg,#6366F1,#3B82F6); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora',sans-serif; transition: opacity .2s; }
 .btn-check:hover { opacity: .88; }
 .btn-next { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--card2); color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Sora',sans-serif; transition: all .2s; }
 .btn-next:hover { border-color: rgba(88,166,255,0.4); color: var(--text); }
@@ -238,7 +240,7 @@ nav {
 .rs-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; display: block; margin-bottom: 3px; }
 .rs-lbl { font-size: 11px; color: var(--text2); }
 .res-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
-.btn-retry { padding: 12px 24px; border-radius: 10px; border: none; background: linear-gradient(135deg,#58A6FF,#3FB950); color: #0D1117; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora',sans-serif; transition: all .2s; }
+.btn-retry { padding: 12px 24px; border-radius: 10px; border: none; background: linear-gradient(135deg,#6366F1,#3B82F6); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Sora',sans-serif; transition: all .2s; }
 .btn-retry:hover { transform: translateY(-1px); }
 .btn-home-res { padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--text2); font-size: 12px; cursor: pointer; font-family: 'Sora',sans-serif; transition: all .2s; }
 .btn-home-res:hover { border-color: rgba(88,166,255,0.4); color: var(--text); }
@@ -288,6 +290,56 @@ nav {
 
 .lb-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
 
+/* Global leaderboard banner */
+.lb-global-banner {
+  background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(59,130,246,0.08));
+  border: 1px solid rgba(99,102,241,0.3); border-radius: 14px;
+  padding: 14px 18px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.lb-global-icon { font-size: 28px; flex-shrink: 0; }
+.lb-global-text { flex: 1; min-width: 160px; }
+.lb-global-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.lb-global-sub { font-size: 11px; color: var(--text2); }
+.lb-sync-btn {
+  padding: 7px 16px; border-radius: 8px; border: 1px solid rgba(99,102,241,0.4);
+  background: var(--accent-dim); color: var(--accent); font-size: 12px; font-weight: 700;
+  cursor: pointer; font-family: 'Sora',sans-serif; transition: all .2s; white-space: nowrap;
+}
+.lb-sync-btn:hover { background: rgba(99,102,241,0.2); }
+.lb-sync-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Top 3 podium */
+.lb-podium { display: flex; justify-content: center; align-items: flex-end; gap: 10px; margin-bottom: 24px; padding: 10px 0; }
+.podium-card {
+  text-align: center; padding: 14px 10px 10px;
+  border-radius: 14px; border: 1px solid var(--border);
+  background: var(--card); min-width: 90px; max-width: 110px; flex: 1;
+  position: relative; transition: transform .2s;
+}
+.podium-card:hover { transform: translateY(-3px); }
+.podium-card.p1 { background: linear-gradient(160deg, rgba(255,215,0,0.1), var(--card)); border-color: rgba(255,215,0,0.35); padding-top: 20px; }
+.podium-card.p2 { background: linear-gradient(160deg, rgba(192,192,192,0.08), var(--card)); border-color: rgba(192,192,192,0.25); }
+.podium-card.p3 { background: linear-gradient(160deg, rgba(205,127,50,0.08), var(--card)); border-color: rgba(205,127,50,0.25); }
+.podium-crown { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 20px; display: none; }
+.p1 .podium-crown { display: block; }
+.podium-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800; color: #fff; margin: 0 auto 8px;
+}
+.podium-rank { font-size: 18px; font-weight: 900; font-family: 'Playfair Display', serif; margin-bottom: 4px; }
+.p1 .podium-rank { color: #FFD700; }
+.p2 .podium-rank { color: #C0C0C0; }
+.p3 .podium-rank { color: #CD7F32; }
+.podium-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.podium-score { font-size: 13px; font-weight: 800; color: var(--green); }
+.podium-detail { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* Rest of leaderboard rows */
+.lb-section-label { font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; margin-top: 8px; display: flex; align-items: center; gap: 10px; }
+.lb-section-label::after { content:''; flex:1; height:1px; background: var(--border); }
+
 .lb-table { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
 .lb-row {
   display: flex; align-items: center; gap: 14px; padding: 14px 18px;
@@ -295,17 +347,18 @@ nav {
 }
 .lb-row:last-child { border-bottom: none; }
 .lb-row:hover { background: var(--card2); }
-.lb-row.me { background: var(--blue-dim); border-color: rgba(88,166,255,0.2); }
+.lb-row.me { background: rgba(99,102,241,0.1); border-left: 3px solid var(--accent); }
 .lb-rank { width: 32px; text-align: center; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; flex-shrink: 0; }
 .rank-1 { color: #FFD700; }
 .rank-2 { color: #C0C0C0; }
 .rank-3 { color: #CD7F32; }
-.lb-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; color: #0D1117; }
+.lb-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; color: #fff; }
 .lb-name { flex: 1; font-size: 14px; font-weight: 600; }
-.lb-you { font-size: 10px; color: var(--blue); background: var(--blue-dim); padding: 2px 7px; border-radius: 6px; margin-left: 6px; font-weight: 700; }
+.lb-you { font-size: 10px; color: var(--accent); background: var(--accent-dim); padding: 2px 7px; border-radius: 6px; margin-left: 6px; font-weight: 700; }
 .lb-stats { text-align: right; }
 .lb-score { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--green); }
 .lb-detail { font-size: 11px; color: var(--text2); margin-top: 1px; }
+.lb-loading { text-align: center; padding: 30px; color: var(--text2); font-size: 13px; }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes pop { 0%{transform:scale(.9)} 60%{transform:scale(1.06)} 100%{transform:scale(1)} }
@@ -325,9 +378,9 @@ nav {
 <div id="authScreen" class="screen active" style="display:flex">
   <div class="auth-box">
     <div class="auth-logo">
-      <div class="auth-logo-icon">🧬</div>
-      <div class="auth-logo-name">Bio<span>Quiz</span></div>
-      <div class="auth-logo-sub">UPSC Biotechnology Practice</div>
+      <div class="auth-logo-icon">🎯</div>
+      <div class="auth-logo-name">GS <span>Practice</span></div>
+      <div class="auth-logo-sub">by Gaurav Karn · UPSC GS Platform</div>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
@@ -369,7 +422,7 @@ nav {
 <!-- ══ APP SCREEN ══ -->
 <div id="appScreen" class="screen" style="display:none">
   <nav>
-    <div class="nav-logo">Bio<span>Quiz</span></div>
+    <div class="nav-logo">GS <span>Practice</span></div>
     <button class="nav-btn nav-tab active" onclick="switchTab('home')" id="tab-home">🏠 <span class="hide-sm">Home</span></button>
     <button class="nav-btn nav-tab" onclick="switchTab('leaderboard')" id="tab-leaderboard">🏆 <span class="hide-sm">Leaderboard</span></button>
     <button class="nav-btn nav-tab" onclick="switchTab('history')" id="tab-history">📊 <span class="hide-sm">My History</span></button>
@@ -385,7 +438,7 @@ nav {
     <div class="home-banner">
       <div class="home-banner-left">
         <div class="home-welcome">Welcome back, <em id="welcomeName">User</em>! 👋</div>
-        <div class="home-welcome-sub">Ready to practice Biotechnology for UPSC?</div>
+        <div class="home-welcome-sub">Ready to master GS for UPSC? Let's go!</div>
         <div class="stat-chips">
           <span class="stat-chip chip-green">✅ <span id="totalCorrect">0</span> Correct</span>
           <span class="stat-chip chip-blue">📋 <span id="totalQuizzes">0</span> Quizzes</span>
@@ -464,8 +517,17 @@ nav {
     <div class="lb-header">
       <div class="lb-title">🏆 Leaderboard</div>
     </div>
-    <div class="lb-note">Rankings based on average score × total quizzes taken. Updated after every quiz.</div>
-    <div class="lb-filter" id="lbFilter"></div>
+    <div class="lb-global-banner">
+      <div class="lb-global-icon">🌐</div>
+      <div class="lb-global-text">
+        <div class="lb-global-title">Global Rankings — All Devices</div>
+        <div class="lb-global-sub">Your score syncs across all devices. Everyone who plays appears here.</div>
+      </div>
+      <button class="lb-sync-btn" id="syncBtn" onclick="syncAndBuild()">↻ Refresh</button>
+    </div>
+    <div class="lb-note">Score = Avg% × log(quizzes+1). Updates after every quiz.</div>
+    <div id="lbPodium" class="lb-podium"></div>
+    <div class="lb-section-label">All Rankings</div>
     <div class="lb-table" id="lbTable"></div>
   </div>
 
@@ -904,6 +966,7 @@ function saveQuizResult(pct, total){
   });
   if(hist[CU.username].length>100) hist[CU.username]=hist[CU.username].slice(0,100);
   saveHistory(hist);
+  pushScoreToGlobal();
 }
 
 function retryQuiz(){
@@ -955,45 +1018,137 @@ function clearMyHistory(){
   buildHistory(); updateHomeBanner();
 }
 
-/* ════════ LEADERBOARD ════════ */
-function buildLeaderboard(){
-  const hist=getHistory();
-  const users=getUsers();
-  // Compute scores per user
-  const scores=[];
+/* ════════ LEADERBOARD (Cross-Device via window.storage) ════════ */
+
+// Push current user's score to shared storage after every quiz
+async function pushScoreToGlobal(){
+  const hist = getHistory();
+  const myHist = hist[CU.username]||[];
+  if(!myHist.length) return;
+  const quizzes = myHist.length;
+  const avg = Math.round(myHist.reduce((s,x)=>s+x.pct,0)/quizzes);
+  const best = Math.max(...myHist.map(x=>x.pct));
+  const correct = myHist.reduce((s,x)=>s+x.correct,0);
+  const total = myHist.reduce((s,x)=>s+x.total,0);
+  const score = Math.round(avg * Math.log(quizzes+1));
+  const payload = JSON.stringify({ name: CU.name, quizzes, avg, best, correct, total, score, updated: Date.now() });
+  try {
+    if(window.storage) await window.storage.set('gsp_user:'+CU.username, payload, true);
+  } catch(e){ /* storage not available, fall back silently */ }
+}
+
+async function fetchGlobalScores(){
+  try {
+    if(!window.storage) return null;
+    const result = await window.storage.list('gsp_user:', true);
+    if(!result || !result.keys || !result.keys.length) return null;
+    const scores = [];
+    for(const key of result.keys){
+      try {
+        const r = await window.storage.get(key, true);
+        if(r && r.value){
+          const d = JSON.parse(r.value);
+          const username = key.replace('gsp_user:','');
+          scores.push({ u: username, ...d });
+        }
+      } catch(e){}
+    }
+    return scores;
+  } catch(e){ return null; }
+}
+
+function mergeScores(globalScores){
+  // Merge global + local (local is source of truth for current user)
+  const hist = getHistory();
+  const users = getUsers();
+  const map = {};
+
+  // Start with global
+  if(globalScores){
+    globalScores.forEach(s=>{ map[s.u] = s; });
+  }
+
+  // Override/add all local users
   Object.keys(hist).forEach(u=>{
-    const h=hist[u]||[];
+    const h = hist[u]||[];
     if(!h.length) return;
-    const quizzes=h.length;
-    const avg=Math.round(h.reduce((s,x)=>s+x.pct,0)/quizzes);
-    const best=Math.max(...h.map(x=>x.pct));
-    const correct=h.reduce((s,x)=>s+x.correct,0);
-    const total=h.reduce((s,x)=>s+x.total,0);
-    const score=Math.round(avg * Math.log(quizzes+1));
-    const name=users[u]?.name||u;
-    scores.push({u,name,quizzes,avg,best,correct,total,score});
+    const quizzes = h.length;
+    const avg = Math.round(h.reduce((s,x)=>s+x.pct,0)/quizzes);
+    const best = Math.max(...h.map(x=>x.pct));
+    const correct = h.reduce((s,x)=>s+x.correct,0);
+    const total = h.reduce((s,x)=>s+x.total,0);
+    const score = Math.round(avg * Math.log(quizzes+1));
+    const name = users[u]?.name || map[u]?.name || u;
+    map[u] = { u, name, quizzes, avg, best, correct, total, score };
   });
-  scores.sort((a,b)=>b.score-a.score);
+
+  return Object.values(map).sort((a,b)=>b.score-a.score);
+}
+
+function renderLeaderboard(scores){
+  const colors = ["#FFD700","#C0C0C0","#CD7F32"];
+  const top3 = scores.slice(0,3);
+
+  // Podium
+  const podiumEl = document.getElementById("lbPodium");
+  if(top3.length){
+    const order = top3.length>=2 ? [top3[1], top3[0], top3[2]].filter(Boolean) : top3;
+    const podiumClass = ['p2','p1','p3'];
+    const rankLabel = top3.length>=2 ? [2,1,3] : [1];
+    podiumEl.innerHTML = order.map((s, i)=>{
+      const actualRank = top3.indexOf(s);
+      const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
+      const isMe = s.u===CU.username;
+      return `<div class="podium-card ${podiumClass[i]}">
+        <div class="podium-crown">👑</div>
+        <div class="podium-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
+        <div class="podium-rank">${colors[actualRank] ? ['🥇','🥈','🥉'][actualRank] : actualRank+1}</div>
+        <div class="podium-name">${s.name}${isMe?' ✦':''}</div>
+        <div class="podium-score">${s.avg}%</div>
+        <div class="podium-detail">${s.quizzes} quiz${s.quizzes!==1?'zes':''}</div>
+      </div>`;
+    }).join("");
+  } else {
+    podiumEl.innerHTML = "";
+  }
+
+  // Table (rank 4+)
+  const rest = scores.slice(3);
+  const lbTable = document.getElementById("lbTable");
   if(!scores.length){
-    document.getElementById("lbTable").innerHTML=`<div class="empty-state"><span class="empty-icon">🏆</span><div class="empty-text">No scores yet!<br>Be the first to complete a quiz.</div></div>`;
+    lbTable.innerHTML=`<div class="empty-state"><span class="empty-icon">🏆</span><div class="empty-text">No scores yet!<br>Be the first to complete a quiz.</div></div>`;
     return;
   }
-  const colors=["#FFD700","#C0C0C0","#CD7F32"];
-  const bgColors=["#2D2200","#1C1C1C","#1A1000"];
-  document.getElementById("lbTable").innerHTML=scores.map((s,i)=>{
-    const isMe=s.u===CU.username;
-    const rankColor=i<3?colors[i]:"var(--text2)";
-    const avatarBg=`hsl(${(s.u.charCodeAt(0)*40)%360},60%,45%)`;
+  if(!rest.length){ lbTable.innerHTML=""; return; }
+  lbTable.innerHTML = rest.map((s,i)=>{
+    const rank = i+4;
+    const isMe = s.u===CU.username;
+    const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
     return `<div class="lb-row ${isMe?"me":""}">
-      <div class="lb-rank ${i===0?"rank-1":i===1?"rank-2":i===2?"rank-3":""}" style="color:${rankColor}">${i+1}</div>
+      <div class="lb-rank" style="color:var(--text2)">${rank}</div>
       <div class="lb-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
       <div class="lb-name">${s.name}${isMe?'<span class="lb-you">YOU</span>':""}</div>
       <div class="lb-stats">
         <div class="lb-score">${s.avg}%</div>
-        <div class="lb-detail">${s.quizzes} quizzes • Best: ${s.best}%</div>
+        <div class="lb-detail">${s.quizzes} quizzes · Best: ${s.best}%</div>
       </div>
     </div>`;
   }).join("");
+}
+
+async function syncAndBuild(){
+  const btn = document.getElementById("syncBtn");
+  if(btn){ btn.disabled=true; btn.textContent="Syncing…"; }
+  const globalScores = await fetchGlobalScores();
+  const merged = mergeScores(globalScores);
+  renderLeaderboard(merged);
+  if(btn){ btn.disabled=false; btn.textContent="↻ Refresh"; }
+}
+
+async function buildLeaderboard(){
+  document.getElementById("lbTable").innerHTML=`<div class="lb-loading">Loading global rankings…</div>`;
+  document.getElementById("lbPodium").innerHTML="";
+  await syncAndBuild();
 }
 
 /* ════════ INIT ════════ */
