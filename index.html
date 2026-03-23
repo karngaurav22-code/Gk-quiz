@@ -755,7 +755,7 @@ window.addEventListener("DOMContentLoaded", () => {
   else { ST.apiKey = ""; refreshApiUI(); }
 });
 
-function getKey(){ return OWNER_KEY || ST.apiKey || ""; }
+function getKey(){ return OWNER_KEY || ST.apiKey || "";}
 
 function refreshApiUI(){
   const dot = document.getElementById("apiDot");
