@@ -1086,51 +1086,63 @@ function mergeScores(globalScores){
 }
 
 function renderLeaderboard(scores){
-  const colors = ["#FFD700","#C0C0C0","#CD7F32"];
-  const top3 = scores.slice(0,3);
-
-  // Podium
+  const medals = ['🥇','🥈','🥉'];
+  const podiumClasses = ['p1','p2','p3'];
+  // Podium order: 2nd, 1st, 3rd (visual podium layout) — but only if enough users
   const podiumEl = document.getElementById("lbPodium");
-  if(top3.length){
-    const order = top3.length>=2 ? [top3[1], top3[0], top3[2]].filter(Boolean) : top3;
-    const podiumClass = ['p2','p1','p3'];
-    const rankLabel = top3.length>=2 ? [2,1,3] : [1];
-    podiumEl.innerHTML = order.map((s, i)=>{
-      const actualRank = top3.indexOf(s);
-      const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
-      const isMe = s.u===CU.username;
-      return `<div class="podium-card ${podiumClass[i]}">
-        <div class="podium-crown">👑</div>
-        <div class="podium-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
-        <div class="podium-rank">${colors[actualRank] ? ['🥇','🥈','🥉'][actualRank] : actualRank+1}</div>
-        <div class="podium-name">${s.name}${isMe?' ✦':''}</div>
-        <div class="podium-score">${s.avg}%</div>
-        <div class="podium-detail">${s.quizzes} quiz${s.quizzes!==1?'zes':''}</div>
-      </div>`;
-    }).join("");
-  } else {
-    podiumEl.innerHTML = "";
-  }
-
-  // Table (rank 4+)
-  const rest = scores.slice(3);
   const lbTable = document.getElementById("lbTable");
+
   if(!scores.length){
+    podiumEl.innerHTML="";
     lbTable.innerHTML=`<div class="empty-state"><span class="empty-icon">🏆</span><div class="empty-text">No scores yet!<br>Be the first to complete a quiz.</div></div>`;
     return;
   }
-  if(!rest.length){ lbTable.innerHTML=""; return; }
-  lbTable.innerHTML = rest.map((s,i)=>{
-    const rank = i+4;
+
+  // Build podium (top 1, 2, or 3 users)
+  const top3 = scores.slice(0,3);
+  // Visual order for podium: [2nd, 1st, 3rd] when 3 users, else just show in order
+  let podiumOrder;
+  if(top3.length === 1){
+    podiumOrder = [{ s: top3[0], rank: 0, cls: 'p1' }];
+  } else if(top3.length === 2){
+    podiumOrder = [
+      { s: top3[1], rank: 1, cls: 'p2' },
+      { s: top3[0], rank: 0, cls: 'p1' }
+    ];
+  } else {
+    podiumOrder = [
+      { s: top3[1], rank: 1, cls: 'p2' },
+      { s: top3[0], rank: 0, cls: 'p1' },
+      { s: top3[2], rank: 2, cls: 'p3' }
+    ];
+  }
+
+  podiumEl.innerHTML = podiumOrder.map(({ s, rank, cls })=>{
+    const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
+    const isMe = s.u===CU.username;
+    return `<div class="podium-card ${cls}">
+      <div class="podium-crown">👑</div>
+      <div class="podium-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
+      <div class="podium-rank">${medals[rank]}</div>
+      <div class="podium-name">${s.name}${isMe?' ✦':''}</div>
+      <div class="podium-score">${s.avg}%</div>
+      <div class="podium-detail">${s.quizzes} quiz${s.quizzes!==1?'zes':''}</div>
+    </div>`;
+  }).join("");
+
+  // ALL RANKINGS table — show everyone with their rank
+  lbTable.innerHTML = scores.map((s, i)=>{
+    const rank = i+1;
     const isMe = s.u===CU.username;
     const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
+    const rankDisplay = rank<=3 ? medals[rank-1] : `<span style="font-weight:700;color:var(--text2)">${rank}</span>`;
     return `<div class="lb-row ${isMe?"me":""}">
-      <div class="lb-rank" style="color:var(--text2)">${rank}</div>
+      <div class="lb-rank">${rankDisplay}</div>
       <div class="lb-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
       <div class="lb-name">${s.name}${isMe?'<span class="lb-you">YOU</span>':""}</div>
       <div class="lb-stats">
         <div class="lb-score">${s.avg}%</div>
-        <div class="lb-detail">${s.quizzes} quizzes · Best: ${s.best}%</div>
+        <div class="lb-detail">${s.quizzes} quiz${s.quizzes!==1?'zes':''} · Best: ${s.best}%</div>
       </div>
     </div>`;
   }).join("");
