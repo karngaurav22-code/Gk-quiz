@@ -302,4 +302,654 @@ nav {
 .rank-3 { color: #CD7F32; }
 .lb-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; color: #0D1117; }
 .lb-name { flex: 1; font-size: 14px; font-weight: 600; }
-.lb-you { font-size: 10px; color: var(--blue); background: var(--blue-dim); padding: 2px 7px; border-radius: 6px; margin-left: 6
+.lb-you { font-size: 10px; color: var(--blue); background: var(--blue-dim); padding: 2px 7px; border-radius: 6px; margin-left: 6px; font-weight: 700; }
+.lb-stats { text-align: right; }
+.lb-score { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--green); }
+.lb-detail { font-size: 11px; color: var(--text2); margin-top: 1px; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pop { 0%{transform:scale(.9)} 60%{transform:scale(1.06)} 100%{transform:scale(1)} }
+
+/* MOBILE */
+@media(max-width:480px){
+  nav { padding: 0 12px; gap: 6px; }
+  .nav-tab span.hide-sm { display: none; }
+  .tab-page { padding: 16px 12px 60px; }
+  .topic-grid { grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ AUTH SCREEN ══ -->
+<div id="authScreen" class="screen active" style="display:flex">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">🧬</div>
+      <div class="auth-logo-name">Bio<span>Quiz</span></div>
+      <div class="auth-logo-sub">UPSC Biotechnology Practice</div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+    </div>
+    <!-- LOGIN -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" id="loginUser" placeholder="Enter your username" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="loginPass" type="password" placeholder="Enter your password" autocomplete="current-password">
+      </div>
+      <button class="auth-btn" onclick="doLogin()">Login →</button>
+      <div class="auth-msg" id="loginMsg"></div>
+    </div>
+    <!-- REGISTER -->
+    <div id="registerForm" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" id="regName" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" id="regUser" placeholder="Choose a username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="regPass" type="password" placeholder="Choose a password">
+      </div>
+      <button class="auth-btn" onclick="doRegister()">Create Account →</button>
+      <div class="auth-msg" id="registerMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP SCREEN ══ -->
+<div id="appScreen" class="screen" style="display:none">
+  <nav>
+    <div class="nav-logo">Bio<span>Quiz</span></div>
+    <button class="nav-btn nav-tab active" onclick="switchTab('home')" id="tab-home">🏠 <span class="hide-sm">Home</span></button>
+    <button class="nav-btn nav-tab" onclick="switchTab('leaderboard')" id="tab-leaderboard">🏆 <span class="hide-sm">Leaderboard</span></button>
+    <button class="nav-btn nav-tab" onclick="switchTab('history')" id="tab-history">📊 <span class="hide-sm">My History</span></button>
+    <div class="nav-user">
+      <div class="nav-avatar" id="navAvatar">?</div>
+      <span class="nav-uname" id="navUname">User</span>
+      <button class="logout-btn" onclick="doLogout()">✕</button>
+    </div>
+  </nav>
+
+  <!-- HOME TAB -->
+  <div class="tab-page active" id="page-home">
+    <div class="home-banner">
+      <div class="home-banner-left">
+        <div class="home-welcome">Welcome back, <em id="welcomeName">User</em>! 👋</div>
+        <div class="home-welcome-sub">Ready to practice Biotechnology for UPSC?</div>
+        <div class="stat-chips">
+          <span class="stat-chip chip-green">✅ <span id="totalCorrect">0</span> Correct</span>
+          <span class="stat-chip chip-blue">📋 <span id="totalQuizzes">0</span> Quizzes</span>
+          <span class="stat-chip chip-yellow">⭐ Best: <span id="bestScore">0%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">Select Topic</div>
+    <div class="topic-grid" id="topicGrid"></div>
+
+    <div class="settings-card">
+      <div class="sg">
+        <div class="sg-lbl">Difficulty</div>
+        <div class="pill-row" id="diffGrp"></div>
+      </div>
+      <div class="sg">
+        <div class="sg-lbl">Questions</div>
+        <div class="pill-row" id="countGrp"></div>
+      </div>
+    </div>
+    <button class="start-quiz-btn" id="startBtn" disabled onclick="startQuiz()">Start Quiz →</button>
+  </div>
+
+  <!-- QUIZ TAB -->
+  <div class="tab-page" id="page-quiz">
+    <div id="quizPanel">
+      <div class="q-topbar">
+        <span class="q-topic-pill" id="qTopicPill">Topic</span>
+        <span class="q-ptext" id="qPtext">1 / 10</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div class="lvl-row">
+        <span class="lvl-badge" id="lvlBadge">Easy</span>
+      </div>
+      <div class="q-card"><div class="q-text" id="qText">-</div></div>
+      <div class="opts" id="optsList"></div>
+      <div class="expl-box" id="explBox">
+        <div class="expl-lbl">💡 Explanation</div>
+        <div class="expl-text" id="explText"></div>
+      </div>
+      <div class="act-row">
+        <button class="btn-check" id="checkBtn" onclick="checkAns()" style="display:none">Check Answer</button>
+        <button class="btn-next" id="nextBtn" onclick="nextQ()" style="display:none">Next →</button>
+      </div>
+    </div>
+
+    <div id="resultsPanel">
+      <span class="res-emoji" id="resEmoji">🏆</span>
+      <h2 class="res-title" id="resTitle">Excellent!</h2>
+      <p class="res-sub" id="resSub">-</p>
+      <div class="score-ring-wrap">
+        <svg class="score-ring-svg" viewBox="0 0 148 148">
+          <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#58A6FF"/><stop offset="100%" stop-color="#3FB950"/></linearGradient></defs>
+          <circle class="ring-bg" cx="74" cy="74" r="62"/>
+          <circle class="ring-fg" id="ringFg" cx="74" cy="74" r="62"/>
+        </svg>
+        <div class="ring-inner"><div class="ring-pct" id="ringPct">0%</div><div class="ring-lbl">Score</div></div>
+      </div>
+      <div class="res-stats">
+        <div class="rs"><span class="rs-num" style="color:var(--green)" id="rRight">0</span><span class="rs-lbl">✅ Correct</span></div>
+        <div class="rs"><span class="rs-num" style="color:var(--red)" id="rWrong">0</span><span class="rs-lbl">❌ Wrong</span></div>
+        <div class="rs"><span class="rs-num" style="color:var(--blue)" id="rTotal">0</span><span class="rs-lbl">📋 Total</span></div>
+      </div>
+      <div class="res-btns">
+        <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+        <button class="btn-home-res" onclick="switchTab('home')">🏠 Home</button>
+        <button class="btn-home-res" onclick="switchTab('leaderboard')">🏆 Leaderboard</button>
+      </div>
+      <div class="writing-section" id="writingSection"></div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD TAB -->
+  <div class="tab-page" id="page-leaderboard">
+    <div class="lb-header">
+      <div class="lb-title">🏆 Leaderboard</div>
+    </div>
+    <div class="lb-note">Rankings based on average score × total quizzes taken. Updated after every quiz.</div>
+    <div class="lb-filter" id="lbFilter"></div>
+    <div class="lb-table" id="lbTable"></div>
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div class="tab-page" id="page-history">
+    <div class="history-header">
+      <div class="history-title">📊 My Progress</div>
+      <button class="clear-btn" onclick="clearMyHistory()">Clear History</button>
+    </div>
+    <div class="my-stats" id="myStats"></div>
+    <div class="section-header">Quiz History</div>
+    <div class="hist-list" id="histList"></div>
+  </div>
+</div>
+
+<script>
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║           ✏️  EASY EDIT ZONE — ADD YOUR CONTENT HERE            ║
+   ║                                                                  ║
+   ║  NAYA SUBJECT ADD KARNE KE LIYE 3 STEPS:                        ║
+   ║                                                                  ║
+   ║  STEP 1 → QDATA mein naye MCQ questions add karo (neeche)       ║
+   ║  STEP 2 → WRITING_Q mein Answer Writing questions add karo      ║
+   ║  STEP 3 → TOPICS_CFG mein topic ka naam aur icon add karo       ║
+   ║                                                                  ║
+   ║  QUESTION FORMAT:                                                ║
+   ║  {                                                               ║
+   ║    topic:"topic_id",   ← apna unique id (same in all 3 steps)   ║
+   ║    tn:"Topic Name",    ← display name                           ║
+   ║    level:"easy",       ← easy / medium / hard / upsc            ║
+   ║    q:"Question text?",                                           ║
+   ║    opts:["A","B","C","D"],                                       ║
+   ║    ans:0,              ← 0=A, 1=B, 2=C, 3=D (correct option)   ║
+   ║    exp:"Explanation."  ← why this answer is correct             ║
+   ║  },                                                              ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+const QDATA = [
+  {topic:"dna_rna",tn:"DNA & RNA",level:"easy",q:"What does DNA stand for?",opts:["Deoxyribonucleic Acid","Diribonucleic Acid","Deoxyribose Amino Acid","Double Nucleic Acid"],ans:0,exp:"DNA = Deoxyribonucleic Acid. It is found in the nucleus and stores genetic information — the blueprint of life."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"easy",q:"Why is a Gene called the 'basic unit of heredity'?",opts:["Because it is the smallest particle","Because it is responsible for expressing traits of any organism or cell","Because it is only found in bacteria","Because it is made of protein"],ans:1,exp:"A gene is responsible for expressing the traits of any organism or cell. Genes combined together form DNA."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"easy",q:"What is a Plasmid?",opts:["A large linear DNA","A small circular DNA found in Bacteria","A protein inside cells","A part of ribosome"],ans:1,exp:"A plasmid is a small circular DNA found in bacteria. It is widely used in Recombinant DNA Technology."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"medium",q:"Which 4 nitrogenous bases are present in DNA?",opts:["Adenine, Uracil, Cytosine, Guanine","Adenine, Thymine, Cytosine, Guanine","Adenine, Thymine, Cytosine, Uracil","Ribose, Thymine, Cytosine, Guanine"],ans:1,exp:"DNA has 4 nitrogenous bases: A, T, C, G. RNA has Uracil instead of Thymine."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"medium",q:"What is the function of mRNA?",opts:["To carry amino acids to ribosome","To give instructions for protein synthesis via Transcription","To make proteins in ribosomes","To control gene expression"],ans:1,exp:"mRNA is created from DNA via Transcription in the nucleus. It carries protein synthesis instructions to the ribosome."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"medium",q:"What is the difference between Transcription and Translation?",opts:["Both are the same process","Transcription: DNA→mRNA; Translation: mRNA→Protein","Transcription makes protein; Translation makes RNA","Transcription happens in cytoplasm"],ans:1,exp:"Transcription: DNA → mRNA (nucleus). Translation: mRNA → Protein (ribosome in cytoplasm)."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"hard",q:"What is the primary function of Micro RNA (miRNA)?",opts:["Directly synthesize proteins","Help in DNA replication","Regulate gene expression and control amount and timing of protein production","Help in ribosome formation"],ans:2,exp:"Micro RNA regulates gene expression and controls both the amount and timing of protein production in cells."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"hard",q:"What is Reverse Transcription?",opts:["Making DNA from Protein","Making DNA from RNA — occurs in Retroviruses like HIV","Making RNA from DNA","Translation happening in reverse"],ans:1,exp:"In Reverse Transcription, DNA is made from RNA. This occurs in Retroviruses like HIV."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"upsc",q:"What is the relationship between Chromatin and Chromosome?",opts:["They are completely different structures","Chromatin condenses to form Chromosomes during cell division","Chromosomes condense to form Chromatin","Chromatin is only found in bacteria"],ans:1,exp:"During cell division, chromatin network condenses and associates together to form chromosomes — different states of the same material."},
+  {topic:"dna_rna",tn:"DNA & RNA",level:"upsc",q:"All RNA present inside a cell is collectively called?",opts:["Proteome","Genome","Transcriptome","Chromatome"],ans:2,exp:"All RNA present inside a cell is collectively called the Transcriptome."},
+  {topic:"genome",tn:"Genome",level:"easy",q:"What is a Genome?",opts:["A type of protein","The complete set of genetic material in any organism","Only the coding DNA","Another name for chromosome"],ans:1,exp:"Genome is the complete collection of all genetic material (DNA) present in any organism."},
+  {topic:"genome",tn:"Genome",level:"easy",q:"When did the Human Genome Project begin?",opts:["Early 1980s","Early 1990s","Early 2000s","Late 1970s"],ans:1,exp:"The Human Genome Project began in the early 1990s — the first organized attempt to read the human genome."},
+  {topic:"genome",tn:"Genome",level:"medium",q:"Who started the Indian Genome Project?",opts:["ISRO; 50,000 genomes","Department of Biotechnology; 10,000 individuals across India","ICMR; 1,00,000 genomes","IIT; only urban population"],ans:1,exp:"The Indian Genome Project was started by the Department of Biotechnology, collecting genome sequences of 10,000 individuals."},
+  {topic:"genome",tn:"Genome",level:"medium",q:"How does Genome study help us?",opts:["Only useful in agriculture","Understanding disease patterns, developing therapies, understanding evolutionary processes","Only for criminal identification","No practical use"],ans:1,exp:"Genome study helps: (1) Understand gene-related disease patterns (2) Develop personalised therapies (3) Understand evolutionary processes."},
+  {topic:"genome",tn:"Genome",level:"hard",q:"What is the objective of the Synthetic Genome Project?",opts:["To create a new species","To construct the human genome from scratch for better understanding of human body functions","To delete existing genomes","Only to build plant genomes"],ans:1,exp:"The Synthetic Genome Project aims to construct the human genome from scratch at the global level."},
+  {topic:"genome",tn:"Genome",level:"upsc",q:"What is a Metagenome and its importance in environmental studies?",opts:["Genome of a single organism","Collection of genomes of microbes in an environment — important for understanding biodiversity and ecosystem health","Only bacteria in human body","An ancient genome"],ans:1,exp:"Metagenome = genomes of all microbes in an environment. Important for: soil health, new antibiotic discovery, pollution tracking, studying unculturable microbes."},
+  {topic:"recombinant",tn:"Recombinant DNA",level:"easy",q:"What is used in Recombinant DNA Technology?",opts:["Only viral DNA","Plasmid obtained from Bacteria","Human WBCs","Mitochondrial DNA"],ans:1,exp:"Recombinant DNA Technology uses the plasmid obtained from bacteria — a simple circular DNA with very little impact on bacteria."},
+  {topic:"recombinant",tn:"Recombinant DNA",level:"medium",q:"What is the correct sequence in Recombinant DNA Technology?",opts:["Only copy viral DNA","Extract plasmid → cut specific part → replace with coding DNA → insert Recombinant DNA into bacteria","Directly transfer human genes","Duplicate chromosomes in lab"],ans:1,exp:"Steps: (1) Extract plasmid from bacteria (2) Cut specific portion (3) Replace with coding DNA → Recombinant DNA (4) Insert into bacteria (5) Bacteria synthesizes desired Recombinant Protein."},
+  {topic:"recombinant",tn:"Recombinant DNA",level:"hard",q:"How is CAR (Chimeric Antigen Receptor) produced?",opts:["Directly from human blood","Cut plasmid → add another DNA → Recombinant DNA → Protein (CAR) → attach to T-cells","Only from viral infection","By radiation treatment"],ans:1,exp:"CAR: Plasmid cut → another DNA added → Recombinant DNA → Protein (CAR) → Chimeric Antigen Receptor, used in CAR-T Cell Therapy."},
+  {topic:"recombinant",tn:"Recombinant DNA",level:"upsc",q:"What is a Recombinant Protein? Give examples.",opts:["A naturally occurring protein","Protein synthesized by bacteria after inserting Recombinant DNA — e.g., Insulin (Humulin), Hepatitis B vaccine, Growth Hormone","A protein from viruses","A synthetic chemical"],ans:1,exp:"Recombinant Protein: desired protein produced by bacteria with Recombinant DNA. Examples: Human Insulin (Humulin), Hepatitis B vaccine, Human Growth Hormone, CAR for CAR-T Therapy."},
+  {topic:"cart",tn:"CAR-T Cell",level:"easy",q:"What is the full form of CAR in CAR-T Cell Therapy?",opts:["Cellular Antigen Receptor","Chimeric Antigen Receptor","Cancer Activation Receptor","Cytokine Antigen Response"],ans:1,exp:"CAR = Chimeric Antigen Receptor — a monoclonal antibody that helps T-cells recognize and destroy cancer cells."},
+  {topic:"cart",tn:"CAR-T Cell",level:"easy",q:"What is the role of T-cells in the body?",opts:["Transport oxygen","Fight against defective or mutative cells like cancer cells","Help in digestion","Produce hormones"],ans:1,exp:"T-cells are part of the immune system responsible for fighting against defective or mutative cells such as cancer cells."},
+  {topic:"cart",tn:"CAR-T Cell",level:"medium",q:"What is the step-by-step process of CAR-T Cell Therapy?",opts:["Give chemotherapy directly","Patient's blood → WBC → T-cell → Add CAR → Multiply in lab → Infuse in body → Kill cancer cells","Kill cancer cells using radiation","Only medication"],ans:1,exp:"Process: Patient's blood → T-cells isolated from WBCs → CAR added → Multiplied in lab → Infused back into body → T-cells recognize, bind with, and kill cancer cells."},
+  {topic:"cart",tn:"CAR-T Cell",level:"medium",q:"What is NexCAR-19?",opts:["A COVID-19 vaccine","An indigenous Indian CAR-T therapy for treatment of B-cell lymphoma","An antibiotic drug","A genome sequencing tool"],ans:1,exp:"NexCAR-19 is an indigenous CAR-T Cell Therapy developed in India for treatment of B-cell lymphoma."},
+  {topic:"cart",tn:"CAR-T Cell",level:"hard",q:"What are the major challenges of CAR-T Cell Therapy?",opts:["No challenges","Generally effective only for blood/fluid cancers, potential for fresh mutations, very expensive","Only works for solid tumors","Only for children"],ans:1,exp:"CAR-T challenges: (1) Effective mainly for blood/fluid cancers (2) Potential for fresh mutations (3) Very expensive."},
+  {topic:"cart",tn:"CAR-T Cell",level:"upsc",q:"Why is CAR-T Cell Therapy considered revolutionary in cancer treatment?",opts:["It's just a simple vaccine","Trains patient's own T-cells to target cancer precisely — personalised; NexCAR-19 gave India global recognition","It's the cheapest treatment","It has no side effects"],ans:1,exp:"Revolutionary: (1) Highly personalised — uses patient's own cells (2) Targeted — attacks only cancer cells (3) Long-lasting immunity. NexCAR-19 provided affordable indigenous option for B-cell lymphoma."},
+  {topic:"amr",tn:"AMR & Phage",level:"easy",q:"What is Anti-Microbial Resistance (AMR)?",opts:["Human allergy to medicines","Development of resistance among microbes against medicines","Running out of antibiotics","Name of a new disease"],ans:1,exp:"AMR occurs when microbes develop resistance against medicines, making them ineffective."},
+  {topic:"amr",tn:"AMR & Phage",level:"medium",q:"Which are the major factors responsible for AMR?",opts:["Only water scarcity","Self-medication, over-prescribing, easy OTC drug availability, improper bio-medical waste disposal","Only hospital infections","Only in developing countries"],ans:1,exp:"4 major AMR factors: (1) Self-medication (2) Over-prescribing by doctors (3) Easy OTC drug availability (4) Improper disposal of bio-medical waste."},
+  {topic:"amr",tn:"AMR & Phage",level:"medium",q:"What is a Bacteriophage?",opts:["An antibiotic medicine","A virus that infects bacteria and introduces changes in their genetic makeup","A type of bacteria","A gene editing tool"],ans:1,exp:"A bacteriophage is a virus that infects bacteria, introducing changes in its genetic makeup. Used in Phage Therapy to treat bacterial infections."},
+  {topic:"amr",tn:"AMR & Phage",level:"hard",q:"When is Phage Therapy especially useful?",opts:["Only in viral infections","In AMR cases when antibiotics no longer work — bacteriophage can target drug-resistant bacteria","Only in cancer treatment","Only in pediatric patients"],ans:1,exp:"Phage Therapy is specially useful in AMR cases. The bacteriophage can be specifically designed to harm drug-resistant bacteria from inside."},
+  {topic:"amr",tn:"AMR & Phage",level:"upsc",q:"Why has WHO described AMR as a 'silent pandemic'?",opts:["Because it makes a lot of noise","Slowly spreading globally without attention, putting millions at risk; self-medication and OTC drugs are major Indian factors","Only occurs during pandemics","Only WHO's perception"],ans:1,exp:"Silent pandemic: slow development, no visible symptoms, growing unnoticed. Solutions: antibiotic stewardship, surveillance, phage therapy, restricting OTC antibiotics."},
+  {topic:"chromosomes",tn:"Chromosomes",level:"easy",q:"What is Chromatin?",opts:["A protein name","Inside the cell, DNA present as condensed network — precursor of chromosomes","A virus name","A part of mitochondria"],ans:1,exp:"Chromatin is the condensed network of DNA inside a cell. During cell division it condenses to form chromosomes."},
+  {topic:"chromosomes",tn:"Chromosomes",level:"medium",q:"What is the difference between Functional and Artificial Chromosomes?",opts:["Both are the same","Functional = naturally occurring; Artificial = created in lab by joining DNA fragments","Functional = only in bacteria; Artificial = only in humans","Functional = smaller"],ans:1,exp:"Functional chromosomes occur naturally. Artificial chromosomes are created in lab by joining DNA fragments — used in gene therapy, disease detection, evolutionary studies."},
+  {topic:"chromosomes",tn:"Chromosomes",level:"medium",q:"What is the function of the Centromere?",opts:["To replicate DNA","Section of chromosome binding chromatid arms; contains Satellite DNA","To synthesize proteins","To stop cell division"],ans:1,exp:"Centromere is the section of a chromosome that binds the chromatid arms. The DNA in centromere is called Satellite DNA."},
+  {topic:"chromosomes",tn:"Chromosomes",level:"hard",q:"What does 'Short Tandem Repeat' mean in Satellite DNA?",opts:["DNA that jumps","In microsatellite DNA, repeating sequences of 1-9 base pairs","Only outside centromere","Found in cancer cells only"],ans:1,exp:"Short Tandem Repeat = repeating sequences in microsatellite DNA. Microsatellites: 1-9 bp, Minisatellites: 10-100 bp, Macrosatellites: >100 bp."},
+  {topic:"chromosomes",tn:"Chromosomes",level:"upsc",q:"What is the role of Satellite DNA in DNA Fingerprinting?",opts:["No role","Each individual has unique satellite DNA patterns — used in forensics, paternity determination, criminal identification","Only in medical diagnosis","Only in plants"],ans:1,exp:"Satellite DNA has unique patterns per individual. Applications: paternity determination, forensic analysis, evolutionary studies, population genetics."},
+  {topic:"crispr",tn:"CRISPR & Jumping Genes",level:"easy",q:"What are Jumping Genes (Transposable Elements)?",opts:["Genes that jump between species","Genes that change their position in DNA (copy-paste or cut-paste)","Viral genes that enter cells","Genes outside chromosomes"],ans:1,exp:"Jumping Genes can change their position in DNA by copy-paste (move to new position, stay in old too) or cut-paste (leave old position)."},
+  {topic:"crispr",tn:"CRISPR & Jumping Genes",level:"medium",q:"What percentage of human genome consists of Jumping Genes?",opts:["Less than 1%","About 10%","More than 40%","About 90%"],ans:2,exp:"More than 40% of genes in the human body are jumping genes or transposable elements."},
+  {topic:"crispr",tn:"CRISPR & Jumping Genes",level:"medium",q:"What is the current scientific understanding of Non-Coding DNA (formerly 'Junk DNA')?",opts:["Completely worthless","May regulate gene expression — Non-coding DNA/Introns could be responsible for gene regulation","Only in cancer cells","Evolutionary garbage"],ans:1,exp:"Recent research suggests Non-coding DNA or Introns may be responsible for regulating gene expression — an active research area."},
+  {topic:"crispr",tn:"CRISPR & Jumping Genes",level:"hard",q:"How did Restriction Enzymes inspire gene editing technology?",opts:["They directly created CRISPR","Bacteria use restriction enzymes to cut viral DNA — this natural defense inspired CRISPR-CAS9","Only helped develop antibiotics","Made only in labs"],ans:1,exp:"Bacteria release restriction enzymes that cut viral genetic sequences. This natural defense mechanism inspired gene editing technology like CRISPR-CAS9."},
+  {topic:"crispr",tn:"CRISPR & Jumping Genes",level:"upsc",q:"What is CRISPR-CAS9? Applications and ethical challenges?",opts:["Only a lab technique","Precise gene editing tool — revolutionary in medicine (genetic diseases) and agriculture (GM crops) — but raises ethical concerns like designer babies","Only works on plants","Still experimental, no real applications"],ans:1,exp:"CRISPR-CAS9: Inspired by restriction enzymes, precision gene editing. Applications: sickle cell cure, cancer treatment, GM crops. Ethical issues: germline editing, designer babies, equity, biosafety."},
+  {topic:"mito",tn:"Mitochondrial DNA",level:"medium",q:"What is Extra-Chromosomal DNA?",opts:["DNA inside chromosome","DNA outside chromosomes — e.g., DNA in mitochondria of eukaryotes","DNA found only in plants","A type of RNA"],ans:1,exp:"Extra-chromosomal DNA is found outside chromosomes. In eukaryotes, trace DNA is present in mitochondria. Defective mitochondrial DNA causes congenital defects."},
+  {topic:"mito",tn:"Mitochondrial DNA",level:"hard",q:"What is Mitochondrial Replacement Therapy (Three-Parent Baby)?",opts:["Therapy using three medicines","Mother's defective mitochondria replaced by healthy donor mitochondria — prevents mitochondrial disease","CRISPR-based therapy","Cancer therapy with three donors"],ans:1,exp:"The defective mitochondria of the mother's ovum cell is replaced by healthy mitochondria from a donor. Father is NOT responsible as sperm's mitochondria are destroyed during fertilization."},
+  {topic:"mito",tn:"Mitochondrial DNA",level:"upsc",q:"What congenital problems can defective mitochondrial DNA cause? Why is the father not responsible?",opts:["No problems; father is responsible","May cause hole in heart, undeveloped organs at birth; father not responsible because sperm's mitochondria are destroyed during fertilization","Father is fully responsible","Only causes mental disorders"],ans:1,exp:"Defective mitochondrial DNA causes congenital effects: hole in heart, undeveloped organs. Father is NOT responsible because all sperm components except genetic material (including mitochondria) are destroyed during fertilization."},
+
+  /* ════════════════════════════════════════════════════════
+     ✏️  NAYA SUBJECT YAHAN SE ADD KARO — EXAMPLE NEECHE HAI
+     Topic ID: "space_tech" → apni marzi ka unique id dena
+
+  {topic:"space_tech",tn:"Space Technology",level:"easy",q:"What is ISRO?",opts:["Indian Space Research Organisation","Indian Science Research Organisation","International Space Research Organisation","Indian Satellite Research Organisation"],ans:0,exp:"ISRO = Indian Space Research Organisation, founded in 1969. It is India's national space agency."},
+  {topic:"space_tech",tn:"Space Technology",level:"medium",q:"...",opts:["A","B","C","D"],ans:0,exp:"..."},
+
+     Aur neeche WRITING_Q aur TOPICS_CFG mein bhi add karna mat bhoolna!
+  ════════════════════════════════════════════════════════ */
+];
+
+const WRITING_Q = {
+  /* ✏️ STEP 2: Naye subject ke Answer Writing questions yahan add karo
+     Format: topic_id: [{marks:"10 marks", q:"Question?", hint:"Key points..."}]
+     Example neeche (space_tech ke liye):
+     space_tech: [
+       {marks:"15 marks", q:"Discuss India's achievements in space technology...", hint:"Chandrayaan, Mangalyaan, PSLV, GSLV, NAVIC..."},
+     ],
+  */
+  dna_rna:[{marks:"10 marks",q:"Why is DNA called the 'Blueprint of Life'? Describe the structure of DNA and its biological significance.",hint:"Double helix, 4 bases (A,T,C,G), deoxyribose sugar, genetic info storage, replication, transcription-translation."},{marks:"15 marks",q:"Study the three types of RNA (mRNA, tRNA, rRNA) and Micro RNA. Explain structure, location and function of each.",hint:"Transcription, Translation, ribosome, codon-anticodon, miRNA regulatory role."}],
+  genome:[{marks:"15 marks",q:"Analyse India's efforts in genomics — from Indian Genome Project to Gujarat Tribal Genome Project. Explain genomics' contribution to public health.",hint:"DBT, 10,000 samples, tribal genome, personalised medicine, disease prediction."},{marks:"10 marks",q:"What is Genome Sequencing? Analyse its scientific, medical and ethical dimensions.",hint:"Process, disease detection, drug development, privacy concerns, genetic discrimination."}],
+  recombinant:[{marks:"15 marks",q:"What is Recombinant DNA Technology? Review its major steps, applications and bioethics. What is India's future in this field?",hint:"Plasmid, restriction enzymes, steps, insulin/vaccine examples, CAR-T, ethical concerns."},{marks:"10 marks",q:"Describe the role of Recombinant DNA Technology in production of GMOs and Recombinant Proteins.",hint:"GM crops, recombinant insulin, vaccines, industrial enzymes, safety concerns."}],
+  cart:[{marks:"15 marks",q:"What is CAR-T Cell Therapy? Analyse its mechanism, applications, limitations and significance of India's NexCAR-19.",hint:"T-cells, CAR mechanism, step-by-step, B-cell lymphoma, NexCAR-19, cost challenge."},{marks:"10 marks",q:"Compare immunotherapy with conventional cancer treatment (chemotherapy, radiation). Advantages and limitations of both.",hint:"Targeted vs broad, side effects, cost, effectiveness, personalised medicine."}],
+  amr:[{marks:"15 marks",q:"Why is AMR considered the greatest health challenge of the 21st century? Causes, consequences, solutions — including Phage Therapy.",hint:"AMR mechanism, 4 causes, global deaths, WHO action plan, phage therapy mechanism."},{marks:"10 marks",q:"Compare Phage Therapy and Antibiotic Therapy. Advantages and disadvantages of both.",hint:"Mechanism, specificity, resistance development, availability, cost, safety."}],
+  chromosomes:[{marks:"10 marks",q:"What is DNA Fingerprinting? Describe the role of Satellite DNA and its applications in forensics and judicial system.",hint:"Satellite DNA unique patterns, forensic use, paternity test, criminal cases."},{marks:"15 marks",q:"Explain the significance of artificial chromosome construction in gene therapy, disease detection and evolutionary research.",hint:"YAC, BAC, construction method, gene therapy delivery, large DNA cloning."}],
+  crispr:[{marks:"15 marks",q:"What is CRISPR-CAS9? Describe its development from restriction enzymes and analyse its medical, agricultural and biosecurity implications.",hint:"Restriction enzyme inspiration, CAS9, guide RNA, sickle cell/cancer applications, GM crops, WHO guidelines."},{marks:"10 marks",q:"What is the contribution of Transposable Elements (Jumping Genes) to genome evolution? Favourable and unfavourable effects.",hint:"Barbara McClintock, copy-paste vs cut-paste, genetic diversity, disease mutations, 40% of human genome."}],
+  mito:[{marks:"15 marks",q:"What is Mitochondrial Replacement Therapy (Three-Parent Baby)? Scientific basis, medical significance and ethical controversies.",hint:"Mitochondrial DNA defects, congenital diseases, donor mitochondria, three-parent concept, ethical concerns."}]
+};
+
+const TOPICS_CFG = [
+  /* ✏️ STEP 3: Naya topic card yahan add karo
+     Format: {id:"topic_id", name:"Display Name", icon:"emoji", color:"#hexcolor"}
+     id → same jo QDATA aur WRITING_Q mein diya hai
+     color options: "#58A6FF"=blue, "#3FB950"=green, "#E3B341"=yellow,
+                    "#F85149"=red, "#BC8CFF"=purple
+  */
+  {id:"dna_rna",name:"DNA & RNA",icon:"🧬",color:"#58A6FF"},
+  {id:"genome",name:"Genome",icon:"🗺️",color:"#3FB950"},
+  {id:"recombinant",name:"Recombinant DNA",icon:"🔬",color:"#BC8CFF"},
+  {id:"cart",name:"CAR-T Cell",icon:"💉",color:"#F85149"},
+  {id:"amr",name:"AMR & Phage",icon:"🦠",color:"#E3B341"},
+  {id:"chromosomes",name:"Chromosomes",icon:"🔭",color:"#58A6FF"},
+  {id:"crispr",name:"CRISPR",icon:"✂️",color:"#3FB950"},
+  {id:"mito",name:"Mitochondrial DNA",icon:"⚡",color:"#BC8CFF"},
+  /* ✏️ NAYA TOPIC YAHAN ADD KARO — example:
+  {id:"space_tech",name:"Space Technology",icon:"🚀",color:"#58A6FF"},
+  {id:"defence",name:"Defence Technology",icon:"🛡️",color:"#F85149"},
+  */
+  {id:"all",name:"All Topics Mix",icon:"⭐",color:"#E3B341"},
+];
+
+/* ════════ STATE ════════ */
+let CU = null; // current user
+let QST = { topic:null, diff:null, count:10, qs:[], idx:0, sel:null, ok:0, fail:0 };
+
+/* ════════ AUTH ════════ */
+function getUsers(){ try{ return JSON.parse(localStorage.getItem("bq_users")||"{}"); }catch(e){return{};} }
+function saveUsers(u){ localStorage.setItem("bq_users", JSON.stringify(u)); }
+function getHistory(){ try{ return JSON.parse(localStorage.getItem("bq_history")||"{}"); }catch(e){return{};} }
+function saveHistory(h){ localStorage.setItem("bq_history", JSON.stringify(h)); }
+
+function switchAuthTab(t){
+  document.getElementById("loginForm").style.display = t==="login"?"block":"none";
+  document.getElementById("registerForm").style.display = t==="register"?"block":"none";
+  document.querySelectorAll(".auth-tab").forEach((b,i) => b.classList.toggle("active", (i===0&&t==="login")||(i===1&&t==="register")));
+}
+
+function doRegister(){
+  const name = document.getElementById("regName").value.trim();
+  const user = document.getElementById("regUser").value.trim().toLowerCase();
+  const pass = document.getElementById("regPass").value;
+  const msg = document.getElementById("registerMsg");
+  if(!name||!user||!pass){ msg.textContent="All fields required!"; msg.className="auth-msg error"; return; }
+  if(user.length<3){ msg.textContent="Username must be 3+ characters!"; msg.className="auth-msg error"; return; }
+  if(pass.length<4){ msg.textContent="Password must be 4+ characters!"; msg.className="auth-msg error"; return; }
+  const users = getUsers();
+  if(users[user]){ msg.textContent="Username already taken!"; msg.className="auth-msg error"; return; }
+  users[user] = { name, pass, joined: Date.now() };
+  saveUsers(users);
+  msg.textContent="Account created! Please login."; msg.className="auth-msg success";
+  setTimeout(()=>switchAuthTab("login"),1200);
+}
+
+function doLogin(){
+  const user = document.getElementById("loginUser").value.trim().toLowerCase();
+  const pass = document.getElementById("loginPass").value;
+  const msg = document.getElementById("loginMsg");
+  if(!user||!pass){ msg.textContent="Enter username and password!"; msg.className="auth-msg error"; return; }
+  const users = getUsers();
+  if(!users[user]||users[user].pass!==pass){ msg.textContent="Invalid username or password!"; msg.className="auth-msg error"; return; }
+  CU = { username: user, name: users[user].name };
+  localStorage.setItem("bq_session", JSON.stringify(CU));
+  loadApp();
+}
+
+function doLogout(){
+  CU = null; localStorage.removeItem("bq_session");
+  document.getElementById("appScreen").style.display = "none";
+  document.getElementById("authScreen").style.display = "flex";
+  document.getElementById("loginUser").value=""; document.getElementById("loginPass").value="";
+  document.getElementById("loginMsg").textContent="";
+}
+
+function checkSession(){
+  try{
+    const s = JSON.parse(localStorage.getItem("bq_session")||"null");
+    const users = getUsers();
+    if(s && users[s.username]){ CU = s; loadApp(); return true; }
+  }catch(e){}
+  return false;
+}
+
+/* ════════ APP LOAD ════════ */
+function loadApp(){
+  document.getElementById("authScreen").style.display = "none";
+  document.getElementById("appScreen").style.display = "block";
+  // Nav
+  document.getElementById("navAvatar").textContent = CU.name[0].toUpperCase();
+  document.getElementById("navUname").textContent = CU.name;
+  document.getElementById("welcomeName").textContent = CU.name.split(" ")[0];
+  buildTopicGrid(); buildDiff(); buildCount();
+  updateHomeBanner(); switchTab("home");
+}
+
+function buildTopicGrid(){
+  const g = document.getElementById("topicGrid"); g.innerHTML="";
+  TOPICS_CFG.forEach(t=>{
+    const cnt = t.id==="all"?QDATA.length:QDATA.filter(q=>q.topic===t.id).length;
+    const d = document.createElement("div");
+    d.className="topic-card"; d.dataset.id=t.id;
+    d.innerHTML=`<div class="tc-check-mark">✓</div><div class="tc-icon">${t.icon}</div><div class="tc-name">${t.name}</div><div class="tc-cnt">${cnt} questions</div>`;
+    d.onclick=()=>selTopic(t.id);
+    g.appendChild(d);
+  });
+}
+
+function buildDiff(){
+  const g=document.getElementById("diffGrp"); g.innerHTML="";
+  ["All","Easy","Medium","Hard","UPSC"].forEach((d,i)=>{
+    const b=document.createElement("button");
+    b.className="pill"+(i===0?" on":""); b.textContent=d;
+    b.onclick=()=>{ QST.diff=d==="All"?null:d.toLowerCase(); document.querySelectorAll("#diffGrp .pill").forEach(x=>x.classList.remove("on")); b.classList.add("on"); };
+    g.appendChild(b);
+  });
+  QST.diff=null;
+}
+
+function buildCount(){
+  const g=document.getElementById("countGrp"); g.innerHTML="";
+  [5,10,15,20].forEach((c,i)=>{
+    const b=document.createElement("button");
+    b.className="pill"+(i===1?" on":""); b.textContent=c;
+    b.onclick=()=>{ QST.count=c; document.querySelectorAll("#countGrp .pill").forEach(x=>x.classList.remove("on")); b.classList.add("on"); };
+    g.appendChild(b);
+  });
+  QST.count=10;
+}
+
+function selTopic(id){
+  QST.topic=id;
+  document.querySelectorAll(".topic-card").forEach(c=>c.classList.remove("sel"));
+  document.querySelector(`.topic-card[data-id="${id}"]`).classList.add("sel");
+  document.getElementById("startBtn").disabled=false;
+}
+
+function updateHomeBanner(){
+  const hist = getHistory();
+  const myHist = hist[CU.username]||[];
+  const total = myHist.reduce((s,h)=>s+h.correct,0);
+  const quizzes = myHist.length;
+  const best = myHist.length>0?Math.max(...myHist.map(h=>h.pct)):0;
+  document.getElementById("totalCorrect").textContent=total;
+  document.getElementById("totalQuizzes").textContent=quizzes;
+  document.getElementById("bestScore").textContent=best+"%";
+}
+
+/* ════════ TABS ════════ */
+function switchTab(t){
+  document.querySelectorAll(".tab-page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-tab").forEach(b=>b.classList.remove("active"));
+  const page=document.getElementById("page-"+t);
+  const tab=document.getElementById("tab-"+t);
+  if(page) page.classList.add("active");
+  if(tab) tab.classList.add("active");
+  if(t==="history") buildHistory();
+  if(t==="leaderboard") buildLeaderboard();
+}
+
+/* ════════ QUIZ ════════ */
+function startQuiz(){
+  let pool = QST.topic==="all"?[...QDATA]:QDATA.filter(q=>q.topic===QST.topic);
+  if(QST.diff) pool=pool.filter(q=>q.level===QST.diff);
+  if(!pool.length){ alert("No questions found! Try different settings."); return; }
+  pool=pool.sort(()=>Math.random()-.5);
+  QST.qs=pool.slice(0,Math.min(QST.count,pool.length));
+  QST.idx=0; QST.ok=0; QST.fail=0; QST.sel=null;
+  document.getElementById("quizPanel").style.display="block";
+  document.getElementById("resultsPanel").style.display="none";
+  // Switch to quiz page directly
+  document.querySelectorAll(".tab-page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-tab").forEach(b=>b.classList.remove("active"));
+  document.getElementById("page-quiz").classList.add("active");
+  renderQ();
+}
+
+function renderQ(){
+  const q=QST.qs[QST.idx]; QST.sel=null;
+  const pct=(QST.idx/QST.qs.length)*100;
+  document.getElementById("progFill").style.width=pct+"%";
+  document.getElementById("qPtext").textContent=`${QST.idx+1} / ${QST.qs.length}`;
+  document.getElementById("qTopicPill").textContent=q.tn;
+  const lvl=document.getElementById("lvlBadge");
+  const lmap={easy:"Easy",medium:"Medium",hard:"Hard",upsc:"UPSC Level"};
+  lvl.textContent=lmap[q.level]; lvl.className="lvl-badge lv-"+q.level;
+  document.getElementById("qText").textContent=q.q;
+  const ol=document.getElementById("optsList"); ol.innerHTML="";
+  q.opts.forEach((opt,i)=>{
+    const b=document.createElement("button");
+    b.className="opt-btn"; b.type="button";
+    b.innerHTML=`<span class="opt-ltr">${String.fromCharCode(65+i)}</span><span>${opt}</span>`;
+    b.onclick=()=>pickOpt(i); ol.appendChild(b);
+  });
+  document.getElementById("explBox").style.display="none";
+  document.getElementById("checkBtn").style.display="none";
+  document.getElementById("nextBtn").style.display="none";
+}
+
+function pickOpt(i){
+  if(QST.sel!==null) return;
+  document.querySelectorAll(".opt-btn").forEach(b=>b.classList.remove("sel"));
+  document.querySelectorAll(".opt-btn")[i].classList.add("sel");
+  QST.sel=i; document.getElementById("checkBtn").style.display="block";
+}
+
+function checkAns(){
+  if(QST.sel===null) return;
+  const q=QST.qs[QST.idx];
+  document.querySelectorAll(".opt-btn").forEach((b,i)=>{
+    b.disabled=true; b.classList.remove("sel");
+    if(i===q.ans) b.classList.add("correct");
+    else if(i===QST.sel) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  if(QST.sel===q.ans) QST.ok++; else QST.fail++;
+  document.getElementById("explText").textContent=q.exp;
+  document.getElementById("explBox").style.display="block";
+  document.getElementById("checkBtn").style.display="none";
+  const isLast=QST.idx>=QST.qs.length-1;
+  const nb=document.getElementById("nextBtn");
+  nb.textContent=isLast?"See Results →":"Next →"; nb.style.display="block";
+}
+
+function nextQ(){
+  QST.idx++;
+  if(QST.idx>=QST.qs.length){ showResults(); return; }
+  renderQ();
+}
+
+function showResults(){
+  document.getElementById("quizPanel").style.display="none";
+  document.getElementById("resultsPanel").style.display="block";
+  const total=QST.ok+QST.fail;
+  const pct=total>0?Math.round((QST.ok/total)*100):0;
+  document.getElementById("resEmoji").textContent=pct>=80?"🏆":pct>=60?"🎯":"📚";
+  document.getElementById("resTitle").textContent=pct>=80?"Excellent!":pct>=60?"Good Work!":"Keep Practicing!";
+  document.getElementById("resSub").textContent=`${total} questions • ${QST.qs[0].tn} • Score: ${pct}%`;
+  document.getElementById("ringPct").textContent=pct+"%";
+  document.getElementById("rRight").textContent=QST.ok;
+  document.getElementById("rWrong").textContent=QST.fail;
+  document.getElementById("rTotal").textContent=total;
+  const C=2*Math.PI*62;
+  setTimeout(()=>{ document.getElementById("ringFg").style.strokeDashoffset=C-(pct/100)*C; },200);
+  // Save to history
+  saveQuizResult(pct, total);
+  updateHomeBanner();
+  // Writing questions
+  const tid=QST.topic==="all"?null:QST.topic;
+  let wqs=[];
+  if(tid&&WRITING_Q[tid]) wqs=WRITING_Q[tid];
+  else{ Object.values(WRITING_Q).forEach(a=>wqs.push(...a)); wqs=wqs.sort(()=>Math.random()-.5).slice(0,3); }
+  const ws=document.getElementById("writingSection");
+  ws.innerHTML=wqs.length?`<div class="writing-section">
+    <div class="writing-sec-head"><span class="writing-badge-hd">✍️ Answer Writing</span><span style="font-size:12px;color:var(--text3)">UPSC Level — Write yourself</span></div>
+    ${wqs.map((w,i)=>`<div class="writing-card"><div class="w-meta"><span class="w-num">Q.${i+1}</span><span class="w-marks">${w.marks}</span></div><div class="w-q">${w.q}</div><div class="w-hint">💭 Key points: ${w.hint}</div></div>`).join("")}
+  </div>`:"";
+}
+
+function saveQuizResult(pct, total){
+  const hist=getHistory();
+  if(!hist[CU.username]) hist[CU.username]=[];
+  hist[CU.username].unshift({
+    topic: QST.qs[0]?.tn||"Mixed",
+    topicId: QST.topic||"all",
+    correct: QST.ok, wrong: QST.fail, total, pct,
+    diff: QST.diff||"All",
+    date: Date.now()
+  });
+  if(hist[CU.username].length>100) hist[CU.username]=hist[CU.username].slice(0,100);
+  saveHistory(hist);
+}
+
+function retryQuiz(){
+  QST.idx=0; QST.ok=0; QST.fail=0; QST.sel=null;
+  QST.qs=QST.qs.sort(()=>Math.random()-.5);
+  document.getElementById("resultsPanel").style.display="none";
+  document.getElementById("quizPanel").style.display="block";
+  renderQ();
+}
+
+/* ════════ HISTORY ════════ */
+function buildHistory(){
+  const hist=getHistory();
+  const myHist=hist[CU.username]||[];
+  // Stats
+  const total=myHist.reduce((s,h)=>s+h.total,0);
+  const correct=myHist.reduce((s,h)=>s+h.correct,0);
+  const best=myHist.length>0?Math.max(...myHist.map(h=>h.pct)):0;
+  const avg=myHist.length>0?Math.round(myHist.reduce((s,h)=>s+h.pct,0)/myHist.length):0;
+  document.getElementById("myStats").innerHTML=`
+    <div class="mstat"><span class="mstat-val" style="color:var(--blue)">${myHist.length}</span><span class="mstat-lbl">Total Quizzes</span></div>
+    <div class="mstat"><span class="mstat-val" style="color:var(--green)">${correct}</span><span class="mstat-lbl">Total Correct</span></div>
+    <div class="mstat"><span class="mstat-val" style="color:var(--yellow)">${best}%</span><span class="mstat-lbl">Best Score</span></div>
+    <div class="mstat"><span class="mstat-val" style="color:var(--purple)">${avg}%</span><span class="mstat-lbl">Avg Score</span></div>
+    <div class="mstat"><span class="mstat-val" style="color:var(--text2)">${total}</span><span class="mstat-lbl">Total Questions</span></div>
+  `;
+  const hl=document.getElementById("histList");
+  if(!myHist.length){ hl.innerHTML=`<div class="empty-state"><span class="empty-icon">📋</span><div class="empty-text">No quizzes yet!<br>Start your first quiz from the Home tab.</div></div>`; return; }
+  hl.innerHTML=myHist.map(h=>{
+    const color=h.pct>=80?"var(--green)":h.pct>=60?"var(--yellow)":"var(--red)";
+    const d=new Date(h.date);
+    const ds=d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+    return `<div class="hist-item">
+      <div class="hist-score-ring" style="color:${color};border-color:${color}">${h.pct}%</div>
+      <div class="hist-info">
+        <div class="hist-topic">${h.topic}</div>
+        <div class="hist-meta">✅ ${h.correct} correct &nbsp;❌ ${h.wrong} wrong &nbsp;• ${h.diff}</div>
+      </div>
+      <div class="hist-date">${ds}</div>
+    </div>`;
+  }).join("");
+}
+
+function clearMyHistory(){
+  if(!confirm("Clear all your quiz history?")) return;
+  const hist=getHistory();
+  hist[CU.username]=[];
+  saveHistory(hist);
+  buildHistory(); updateHomeBanner();
+}
+
+/* ════════ LEADERBOARD ════════ */
+function buildLeaderboard(){
+  const hist=getHistory();
+  const users=getUsers();
+  // Compute scores per user
+  const scores=[];
+  Object.keys(hist).forEach(u=>{
+    const h=hist[u]||[];
+    if(!h.length) return;
+    const quizzes=h.length;
+    const avg=Math.round(h.reduce((s,x)=>s+x.pct,0)/quizzes);
+    const best=Math.max(...h.map(x=>x.pct));
+    const correct=h.reduce((s,x)=>s+x.correct,0);
+    const total=h.reduce((s,x)=>s+x.total,0);
+    const score=Math.round(avg * Math.log(quizzes+1));
+    const name=users[u]?.name||u;
+    scores.push({u,name,quizzes,avg,best,correct,total,score});
+  });
+  scores.sort((a,b)=>b.score-a.score);
+  if(!scores.length){
+    document.getElementById("lbTable").innerHTML=`<div class="empty-state"><span class="empty-icon">🏆</span><div class="empty-text">No scores yet!<br>Be the first to complete a quiz.</div></div>`;
+    return;
+  }
+  const colors=["#FFD700","#C0C0C0","#CD7F32"];
+  const bgColors=["#2D2200","#1C1C1C","#1A1000"];
+  document.getElementById("lbTable").innerHTML=scores.map((s,i)=>{
+    const isMe=s.u===CU.username;
+    const rankColor=i<3?colors[i]:"var(--text2)";
+    const avatarBg=`hsl(${(s.u.charCodeAt(0)*40)%360},60%,45%)`;
+    return `<div class="lb-row ${isMe?"me":""}">
+      <div class="lb-rank ${i===0?"rank-1":i===1?"rank-2":i===2?"rank-3":""}" style="color:${rankColor}">${i+1}</div>
+      <div class="lb-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
+      <div class="lb-name">${s.name}${isMe?'<span class="lb-you">YOU</span>':""}</div>
+      <div class="lb-stats">
+        <div class="lb-score">${s.avg}%</div>
+        <div class="lb-detail">${s.quizzes} quizzes • Best: ${s.best}%</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ════════ INIT ════════ */
+window.addEventListener("DOMContentLoaded",()=>{
+  if(!checkSession()){
+    document.getElementById("authScreen").style.display="flex";
+    document.getElementById("appScreen").style.display="none";
+  }
+  // Enter key support
+  ["loginUser","loginPass"].forEach(id=>document.getElementById(id).addEventListener("keypress",e=>{ if(e.key==="Enter") doLogin(); }));
+  ["regName","regUser","regPass"].forEach(id=>document.getElementById(id).addEventListener("keypress",e=>{ if(e.key==="Enter") doRegister(); }));
+});
+</script>
+</body>
+</html>
