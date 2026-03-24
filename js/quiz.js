@@ -1,3 +1,44 @@
+let timerInterval = null;
+
+function startTimer(){
+  let t = 30;
+  const el = document.getElementById("qTimer");
+  el.textContent = t;
+  el.className = "q-timer";
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    t--;
+    el.textContent = t;
+    if(t <= 10) el.className = "q-timer danger";
+    else if(t <= 20) el.className = "q-timer warning";
+    if(t <= 0){
+      clearInterval(timerInterval);
+      autoNext();
+    }
+  }, 1000);
+}
+
+function stopTimer(){
+  clearInterval(timerInterval);
+}
+
+function autoNext(){
+  const q = QST.qs[QST.idx];
+  document.querySelectorAll(".opt-btn").forEach((b,i)=>{
+    b.disabled = true;
+    if(i === q.ans) b.classList.add("correct");
+    else b.classList.add("dim");
+  });
+  QST.fail++;
+  document.getElementById("explText").textContent = q.exp;
+  document.getElementById("explBox").style.display = "block";
+  document.getElementById("checkBtn").style.display = "none";
+  const isLast = QST.idx >= QST.qs.length - 1;
+  const nb = document.getElementById("nextBtn");
+  nb.textContent = isLast ? "See Results →" : "Next →";
+  nb.style.display = "block";
+}
+
 /* ════════ QUIZ ════════ */
 function startQuiz(){
   let pool = QST.topic==="all"?[...QDATA]:QDATA.filter(q=>q.topic===QST.topic);
@@ -41,6 +82,7 @@ function renderQ(){
   document.getElementById("explBox").style.display="none";
   document.getElementById("checkBtn").style.display="none";
   document.getElementById("nextBtn").style.display="none";
+  startTimer();
 }
 
 function pickOpt(i){
@@ -52,6 +94,7 @@ function pickOpt(i){
 
 function checkAns(){
   if(QST.sel===null) return;
+  stopTimer();
   const q=QST.qs[QST.idx];
   document.querySelectorAll(".opt-btn").forEach((b,i)=>{
     b.disabled=true; b.classList.remove("sel");
