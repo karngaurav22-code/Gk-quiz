@@ -34,6 +34,11 @@ async function initFirebase(){
   onAuthStateChanged(firebaseAuth, user => {
     if(user && user.emailVerified){
       CU = { username: user.uid, name: user.displayName || user.email.split("@")[0], email: user.email };
+     firebase.database().ref('users/' + user.uid).set({
+  name: user.displayName,
+  email: user.email,
+  lastLogin: new Date().toISOString()
+});
       loadApp();
     } else if(!user){
       showAuth();
