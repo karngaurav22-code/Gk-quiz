@@ -179,6 +179,35 @@ msg.textContent="reset link sent";
 
 onAuthStateChanged(auth,(user)=>{
 
+document.getElementById("loadingScreen").style.display="none";
+
+if(user){
+
+document.getElementById("authScreen").style.display="none";
+
+document.getElementById("appScreen").style.display="block";
+
+document.getElementById("navUname").textContent=user.email;
+
+
+/* important */
+buildTopicGrid();
+
+switchTab("home");
+
+
+}
+
+else{
+
+document.getElementById("authScreen").style.display="flex";
+
+document.getElementById("appScreen").style.display="none";
+
+}
+
+});
+
 
 
 document.getElementById("loadingScreen").style.display="none";
