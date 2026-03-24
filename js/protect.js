@@ -9,9 +9,9 @@ document.addEventListener('dragstart', function(e) {
   e.preventDefault();
 });
 
-document.addEventListener('touchstart', function(e) {
+document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
-}, { passive: false });
+});
 
 document.addEventListener('selectionchange', function() {
   document.getSelection().removeAllRanges();
