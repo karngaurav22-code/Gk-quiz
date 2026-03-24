@@ -85,7 +85,7 @@ function renderQ(){
   document.getElementById("explBox").style.display="none";
   document.getElementById("checkBtn").style.display="none";
   document.getElementById("nextBtn").style.display="none";
-  startTimer();
+  //startTimer();
 }
 
 function pickOpt(i){
