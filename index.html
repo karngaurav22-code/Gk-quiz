@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-</head>
-<body>
 
 <!-- ══ AUTH SCREEN ══ -->
 <div id="authScreen" class="screen active" style="display:flex">
@@ -25,9 +23,14 @@
     </div>
     <!-- LOGIN -->
     <div id="loginForm">
+      <!-- Google Login Button -->
+      <button class="auth-btn" onclick="doGoogleLogin()" style="background:linear-gradient(135deg,#4285F4,#34A853);margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px;">
+        <span style="font-size:16px">G</span> Continue with Google
+      </button>
+      <div style="text-align:center;color:var(--text3);font-size:12px;margin:10px 0;">— or login with email —</div>
       <div class="form-group">
-        <label class="form-label">Username</label>
-        <input class="form-input" id="loginUser" placeholder="Enter your username" autocomplete="username">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="loginUser" type="email" placeholder="Enter your email" autocomplete="email">
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
@@ -38,17 +41,22 @@
     </div>
     <!-- REGISTER -->
     <div id="registerForm" style="display:none">
+      <!-- Google Register Button -->
+      <button class="auth-btn" onclick="doGoogleLogin()" style="background:linear-gradient(135deg,#4285F4,#34A853);margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px;">
+        <span style="font-size:16px">G</span> Continue with Google
+      </button>
+      <div style="text-align:center;color:var(--text3);font-size:12px;margin:10px 0;">— or register with email —</div>
       <div class="form-group">
         <label class="form-label">Full Name</label>
         <input class="form-input" id="regName" placeholder="Your full name">
       </div>
       <div class="form-group">
-        <label class="form-label">Username</label>
-        <input class="form-input" id="regUser" placeholder="Choose a username">
+        <label class="form-label">Email</label>
+        <input class="form-input" id="regUser" type="email" placeholder="Enter your email">
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input class="form-input" id="regPass" type="password" placeholder="Choose a password">
+        <input class="form-input" id="regPass" type="password" placeholder="Choose a password (6+ chars)">
       </div>
       <button class="auth-btn" onclick="doRegister()">Create Account →</button>
       <div class="auth-msg" id="registerMsg"></div>
@@ -184,5 +192,6 @@
 <script src="js/auth.js"></script>
 <script src="js/quiz.js"></script>
 <script src="js/leaderboard.js"></script>
+<script>window.addEventListener("DOMContentLoaded", initFirebase);</script>
 </body>
 </html>
