@@ -44,7 +44,7 @@ function renderQ(){
 }
 
 function pickOpt(i){
-  if(QST.sel!==null) return;
+  if(QST.sel!==null && document.querySelectorAll(".opt-btn")[0].disabled) return;
   document.querySelectorAll(".opt-btn").forEach(b=>b.classList.remove("sel"));
   document.querySelectorAll(".opt-btn")[i].classList.add("sel");
   QST.sel=i; document.getElementById("checkBtn").style.display="block";
