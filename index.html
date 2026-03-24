@@ -30,17 +30,20 @@ body::before {
 }
 
   /* WATERMARK */
-body::after {
-  content: '';
+.watermark {
   position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   background-image: url('https://raw.githubusercontent.com/karngaurav22-code/Gk-quiz/refs/heads/main/watermark.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 200px;
+  background-size: cover;
+  background-position: center;
   opacity: 0.08;
+  pointer-events: none;
+  z-index: -1;
 }
 /* ── SCREENS ── */
 .screen { display: none; position: relative; z-index: 1; }
@@ -1270,5 +1273,6 @@ window.addEventListener("DOMContentLoaded",()=>{
   ["regName","regUser","regPass"].forEach(id=>document.getElementById(id).addEventListener("keypress",e=>{ if(e.key==="Enter") doRegister(); }));
 });
 </script>
+<div class="watermark"></div>
 </body>
 </html>
