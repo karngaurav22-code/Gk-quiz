@@ -11,7 +11,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); min-height: 100vh; font-family: 'Sora', sans-serif; color: var(--text); }
+body { background: var(--bg); min-height: 100vh; font-family: 'Sora', sans-serif; color: var(--text);-webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
 
 /* GLOW BG */
 body::before {
