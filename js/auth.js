@@ -145,6 +145,32 @@ async function doLogin(){
   }
 }
 
+/* ════════ FORGOT PASSWORD ════════ */
+async function doForgotPassword(){
+  const email = document.getElementById("loginUser").value.trim().toLowerCase();
+  const msg = document.getElementById("loginMsg");
+
+  if(!email){ 
+    msg.textContent = "⚠️ Pehle email daalo!"; 
+    msg.className = "auth-msg error"; 
+    return; 
+  }
+
+  try {
+    const { sendPasswordResetEmail } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    await sendPasswordResetEmail(firebaseAuth, email);
+    msg.textContent = "✅ Password reset email bhej diya! Inbox check karo.";
+    msg.className = "auth-msg success";
+  } catch(e){
+    const errMap = {
+      "auth/user-not-found": "Is email se koi account nahi mila!",
+      "auth/invalid-email": "Invalid email address!"
+    };
+    msg.textContent = errMap[e.code] || "Kuch galat hua, dobara try karo!";
+    msg.className = "auth-msg error";
+  }
+}
+
 /* ════════ LOGOUT ════════ */
 async function doLogout(){
   const { signOut } = window._fbAuth;
