@@ -29,6 +29,19 @@ body::before {
               radial-gradient(ellipse at 50% 100%, rgba(59,130,246,0.04) 0%, transparent 50%);
 }
 
+  /* WATERMARK */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('https://raw.githubusercontent.com/karngaurav22-code/Gk-quiz/refs/heads/main/watermark.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 400px;
+  opacity: 0.08;
+}
 /* ── SCREENS ── */
 .screen { display: none; position: relative; z-index: 1; }
 .screen.active { display: block; }
