@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GS Practice Platform by Gaurav Karn</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+</head>
+<body>
+
+<!-- ══ AUTH SCREEN ══ -->
+<div id="authScreen" class="screen active" style="display:flex">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">🎯</div>
+      <div class="auth-logo-name">GS <span>Practice</span></div>
+      <div class="auth-logo-sub">by Gaurav Karn · UPSC GS Platform</div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+    </div>
+    <!-- LOGIN -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" id="loginUser" placeholder="Enter your username" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="loginPass" type="password" placeholder="Enter your password" autocomplete="current-password">
+      </div>
+      <button class="auth-btn" onclick="doLogin()">Login →</button>
+      <div class="auth-msg" id="loginMsg"></div>
+    </div>
+    <!-- REGISTER -->
+    <div id="registerForm" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" id="regName" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" id="regUser" placeholder="Choose a username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="regPass" type="password" placeholder="Choose a password">
+      </div>
+      <button class="auth-btn" onclick="doRegister()">Create Account →</button>
+      <div class="auth-msg" id="registerMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP SCREEN ══ -->
+<div id="appScreen" class="screen" style="display:none">
+  <nav>
+    <div class="nav-logo">GS <span>Practice</span></div>
+    <button class="nav-btn nav-tab active" onclick="switchTab('home')" id="tab-home">🏠 <span class="hide-sm">Home</span></button>
+    <button class="nav-btn nav-tab" onclick="switchTab('leaderboard')" id="tab-leaderboard">🏆 <span class="hide-sm">Leaderboard</span></button>
+    <button class="nav-btn nav-tab" onclick="switchTab('history')" id="tab-history">📊 <span class="hide-sm">My History</span></button>
+    <div class="nav-user">
+      <div class="nav-avatar" id="navAvatar">?</div>
+      <span class="nav-uname" id="navUname">User</span>
+      <button class="logout-btn" onclick="doLogout()">✕</button>
+    </div>
+  </nav>
+
+  <!-- HOME TAB -->
+  <div class="tab-page active" id="page-home">
+    <div class="home-banner">
+      <div class="home-banner-left">
+        <div class="home-welcome">Welcome back, <em id="welcomeName">User</em>! 👋</div>
+        <div class="home-welcome-sub">Ready to master GS for UPSC? Let's go!</div>
+        <div class="stat-chips">
+          <span class="stat-chip chip-green">✅ <span id="totalCorrect">0</span> Correct</span>
+          <span class="stat-chip chip-blue">📋 <span id="totalQuizzes">0</span> Quizzes</span>
+          <span class="stat-chip chip-yellow">⭐ Best: <span id="bestScore">0%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">Select Topic</div>
+    <div class="topic-grid" id="topicGrid"></div>
+
+    <div class="settings-card">
+      <div class="sg">
+        <div class="sg-lbl">Difficulty</div>
+        <div class="pill-row" id="diffGrp"></div>
+      </div>
+      <div class="sg">
+        <div class="sg-lbl">Questions</div>
+        <div class="pill-row" id="countGrp"></div>
+      </div>
+    </div>
+    <button class="start-quiz-btn" id="startBtn" disabled onclick="startQuiz()">Start Quiz →</button>
+  </div>
+
+  <!-- QUIZ TAB -->
+  <div class="tab-page" id="page-quiz">
+    <div id="quizPanel">
+      <div class="q-topbar">
+        <span class="q-topic-pill" id="qTopicPill">Topic</span>
+        <span class="q-ptext" id="qPtext">1 / 10</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div class="lvl-row">
+        <span class="lvl-badge" id="lvlBadge">Easy</span>
+      </div>
+      <div class="q-card"><div class="q-text" id="qText">-</div></div>
+      <div class="opts" id="optsList"></div>
+      <div class="expl-box" id="explBox">
+        <div class="expl-lbl">💡 Explanation</div>
+        <div class="expl-text" id="explText"></div>
+      </div>
+      <div class="act-row">
+        <button class="btn-check" id="checkBtn" onclick="checkAns()" style="display:none">Check Answer</button>
+        <button class="btn-next" id="nextBtn" onclick="nextQ()" style="display:none">Next →</button>
+      </div>
+    </div>
+
+    <div id="resultsPanel">
+      <span class="res-emoji" id="resEmoji">🏆</span>
+      <h2 class="res-title" id="resTitle">Excellent!</h2>
+      <p class="res-sub" id="resSub">-</p>
+      <div class="score-ring-wrap">
+        <svg class="score-ring-svg" viewBox="0 0 148 148">
+          <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#58A6FF"/><stop offset="100%" stop-color="#3FB950"/></linearGradient></defs>
+          <circle class="ring-bg" cx="74" cy="74" r="62"/>
+          <circle class="ring-fg" id="ringFg" cx="74" cy="74" r="62"/>
+        </svg>
+        <div class="ring-inner"><div class="ring-pct" id="ringPct">0%</div><div class="ring-lbl">Score</div></div>
+      </div>
+      <div class="res-stats">
+        <div class="rs"><span class="rs-num" style="color:var(--green)" id="rRight">0</span><span class="rs-lbl">✅ Correct</span></div>
+        <div class="rs"><span class="rs-num" style="color:var(--red)" id="rWrong">0</span><span class="rs-lbl">❌ Wrong</span></div>
+        <div class="rs"><span class="rs-num" style="color:var(--blue)" id="rTotal">0</span><span class="rs-lbl">📋 Total</span></div>
+      </div>
+      <div class="res-btns">
+        <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+        <button class="btn-home-res" onclick="switchTab('home')">🏠 Home</button>
+        <button class="btn-home-res" onclick="switchTab('leaderboard')">🏆 Leaderboard</button>
+      </div>
+      <div class="writing-section" id="writingSection"></div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD TAB -->
+  <div class="tab-page" id="page-leaderboard">
+    <div class="lb-header">
+      <div class="lb-title">🏆 Leaderboard</div>
+    </div>
+    <div class="lb-global-banner">
+      <div class="lb-global-icon">🌐</div>
+      <div class="lb-global-text">
+        <div class="lb-global-title">Global Rankings — All Devices</div>
+        <div class="lb-global-sub">Your score syncs across all devices. Everyone who plays appears here.</div>
+      </div>
+      <button class="lb-sync-btn" id="syncBtn" onclick="syncAndBuild()">↻ Refresh</button>
+    </div>
+    <div class="lb-note">Score = Avg% × log(quizzes+1). Updates after every quiz.</div>
+    <div id="lbPodium" class="lb-podium"></div>
+    <div class="lb-section-label">All Rankings</div>
+    <div class="lb-table" id="lbTable"></div>
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div class="tab-page" id="page-history">
+    <div class="history-header">
+      <div class="history-title">📊 My Progress</div>
+      <button class="clear-btn" onclick="clearMyHistory()">Clear History</button>
+    </div>
+    <div class="my-stats" id="myStats"></div>
+    <div class="section-header">Quiz History</div>
+    <div class="hist-list" id="histList"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/leaderboard.js"></script>
+</body>
+</html>
