@@ -23,6 +23,10 @@ async function initFirebase(){
 
   firebaseApp  = initializeApp(firebaseConfig);
   firebaseAuth = getAuth(firebaseApp);
+  const { getDatabase, ref, set } =
+await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js");
+
+const db = getDatabase(firebaseApp);
 
   window._fbAuth = {
     getAuth, GoogleAuthProvider, signInWithPopup,
@@ -34,7 +38,7 @@ async function initFirebase(){
   onAuthStateChanged(firebaseAuth, user => {
     if(user && user.emailVerified){
       CU = { username: user.uid, name: user.displayName || user.email.split("@")[0], email: user.email };
-     firebase.database().ref('users/' + user.uid).set({
+     set(ref(db, 'users/' + user.uid), {
   name: user.displayName,
   email: user.email,
   lastLogin: new Date().toISOString()
