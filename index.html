@@ -1018,9 +1018,10 @@ function clearMyHistory(){
   buildHistory(); updateHomeBanner();
 }
 
-/* ════════ LEADERBOARD (Cross-Device via window.storage) ════════ */
+/* ════════ LEADERBOARD (Cross-Device via Firebase) ════════ */
 
-// Push current user's score to shared storage after every quiz
+const FB_URL = "https://gk-by-gaurav-default-rtdb.firebaseio.com";
+
 async function pushScoreToGlobal(){
   const hist = getHistory();
   const myHist = hist[CU.username]||[];
@@ -1031,44 +1032,31 @@ async function pushScoreToGlobal(){
   const correct = myHist.reduce((s,x)=>s+x.correct,0);
   const total = myHist.reduce((s,x)=>s+x.total,0);
   const score = Math.round(avg * Math.log(quizzes+1));
-  const payload = JSON.stringify({ name: CU.name, quizzes, avg, best, correct, total, score, updated: Date.now() });
+  const payload = { name: CU.name, quizzes, avg, best, correct, total, score, updated: Date.now() };
   try {
-    if(window.storage) await window.storage.set('gsp_user:'+CU.username, payload, true);
-  } catch(e){ /* storage not available, fall back silently */ }
+    await fetch(`${FB_URL}/leaderboard/${CU.username}.json`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch(e){}
 }
 
 async function fetchGlobalScores(){
   try {
-    if(!window.storage) return null;
-    const result = await window.storage.list('gsp_user:', true);
-    if(!result || !result.keys || !result.keys.length) return null;
-    const scores = [];
-    for(const key of result.keys){
-      try {
-        const r = await window.storage.get(key, true);
-        if(r && r.value){
-          const d = JSON.parse(r.value);
-          const username = key.replace('gsp_user:','');
-          scores.push({ u: username, ...d });
-        }
-      } catch(e){}
-    }
-    return scores;
+    const res = await fetch(`${FB_URL}/leaderboard.json`);
+    if(!res.ok) return null;
+    const data = await res.json();
+    if(!data) return null;
+    return Object.entries(data).map(([u,d])=>({ u, ...d }));
   } catch(e){ return null; }
 }
 
 function mergeScores(globalScores){
-  // Merge global + local (local is source of truth for current user)
   const hist = getHistory();
   const users = getUsers();
   const map = {};
-
-  // Start with global
-  if(globalScores){
-    globalScores.forEach(s=>{ map[s.u] = s; });
-  }
-
-  // Override/add all local users
+  if(globalScores){ globalScores.forEach(s=>{ map[s.u]=s; }); }
   Object.keys(hist).forEach(u=>{
     const h = hist[u]||[];
     if(!h.length) return;
@@ -1081,14 +1069,11 @@ function mergeScores(globalScores){
     const name = users[u]?.name || map[u]?.name || u;
     map[u] = { u, name, quizzes, avg, best, correct, total, score };
   });
-
   return Object.values(map).sort((a,b)=>b.score-a.score);
 }
 
 function renderLeaderboard(scores){
   const medals = ['🥇','🥈','🥉'];
-  const podiumClasses = ['p1','p2','p3'];
-  // Podium order: 2nd, 1st, 3rd (visual podium layout) — but only if enough users
   const podiumEl = document.getElementById("lbPodium");
   const lbTable = document.getElementById("lbTable");
 
@@ -1098,28 +1083,15 @@ function renderLeaderboard(scores){
     return;
   }
 
-  // Build podium (top 1, 2, or 3 users)
   const top3 = scores.slice(0,3);
-  // Visual order for podium: [2nd, 1st, 3rd] when 3 users, else just show in order
   let podiumOrder;
-  if(top3.length === 1){
-    podiumOrder = [{ s: top3[0], rank: 0, cls: 'p1' }];
-  } else if(top3.length === 2){
-    podiumOrder = [
-      { s: top3[1], rank: 1, cls: 'p2' },
-      { s: top3[0], rank: 0, cls: 'p1' }
-    ];
-  } else {
-    podiumOrder = [
-      { s: top3[1], rank: 1, cls: 'p2' },
-      { s: top3[0], rank: 0, cls: 'p1' },
-      { s: top3[2], rank: 2, cls: 'p3' }
-    ];
-  }
+  if(top3.length===1){ podiumOrder=[{s:top3[0],rank:0,cls:'p1'}]; }
+  else if(top3.length===2){ podiumOrder=[{s:top3[1],rank:1,cls:'p2'},{s:top3[0],rank:0,cls:'p1'}]; }
+  else { podiumOrder=[{s:top3[1],rank:1,cls:'p2'},{s:top3[0],rank:0,cls:'p1'},{s:top3[2],rank:2,cls:'p3'}]; }
 
-  podiumEl.innerHTML = podiumOrder.map(({ s, rank, cls })=>{
-    const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
-    const isMe = s.u===CU.username;
+  podiumEl.innerHTML = podiumOrder.map(({s,rank,cls})=>{
+    const avatarBg=`hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
+    const isMe=s.u===CU.username;
     return `<div class="podium-card ${cls}">
       <div class="podium-crown">👑</div>
       <div class="podium-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
@@ -1130,12 +1102,11 @@ function renderLeaderboard(scores){
     </div>`;
   }).join("");
 
-  // ALL RANKINGS table — show everyone with their rank
-  lbTable.innerHTML = scores.map((s, i)=>{
-    const rank = i+1;
-    const isMe = s.u===CU.username;
-    const avatarBg = `hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
-    const rankDisplay = rank<=3 ? medals[rank-1] : `<span style="font-weight:700;color:var(--text2)">${rank}</span>`;
+  lbTable.innerHTML = scores.map((s,i)=>{
+    const rank=i+1;
+    const isMe=s.u===CU.username;
+    const avatarBg=`hsl(${(s.u.charCodeAt(0)*40)%360},65%,42%)`;
+    const rankDisplay=rank<=3?medals[rank-1]:`<span style="font-weight:700;color:var(--text2)">${rank}</span>`;
     return `<div class="lb-row ${isMe?"me":""}">
       <div class="lb-rank">${rankDisplay}</div>
       <div class="lb-avatar" style="background:${avatarBg}">${s.name[0].toUpperCase()}</div>
@@ -1149,12 +1120,12 @@ function renderLeaderboard(scores){
 }
 
 async function syncAndBuild(){
-  const btn = document.getElementById("syncBtn");
-  if(btn){ btn.disabled=true; btn.textContent="Syncing…"; }
-  const globalScores = await fetchGlobalScores();
-  const merged = mergeScores(globalScores);
+  const btn=document.getElementById("syncBtn");
+  if(btn){btn.disabled=true;btn.textContent="Syncing…";}
+  const globalScores=await fetchGlobalScores();
+  const merged=mergeScores(globalScores);
   renderLeaderboard(merged);
-  if(btn){ btn.disabled=false; btn.textContent="↻ Refresh"; }
+  if(btn){btn.disabled=false;btn.textContent="↻ Refresh";}
 }
 
 async function buildLeaderboard(){
