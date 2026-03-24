@@ -3,6 +3,7 @@ let timerInterval = null;
 function startTimer(){
   let t = 30;
   const el = document.getElementById("qTimer");
+  if(!el) return;
   el.textContent = t;
   el.className = "q-timer";
   clearInterval(timerInterval);
