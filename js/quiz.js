@@ -1,28 +1,3 @@
-let timerInterval = null;
-
-function startTimer(){
-  let t = 30;
-  const el = document.getElementById("qTimer");
-  if(!el) return;
-  el.textContent = t;
-  el.className = "q-timer";
-  clearInterval(timerInterval);
-  timerInterval = setInterval(()=>{
-    t--;
-    el.textContent = t;
-    if(t <= 10) el.className = "q-timer danger";
-    else if(t <= 20) el.className = "q-timer warning";
-    if(t <= 0){
-      clearInterval(timerInterval);
-      autoNext();
-    }
-  }, 1000);
-}
-
-function stopTimer(){
-  clearInterval(timerInterval);
-}
-
 function autoNext(){
   const q = QST.qs[QST.idx];
   document.querySelectorAll(".opt-btn").forEach((b,i)=>{
