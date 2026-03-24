@@ -38,13 +38,13 @@ const db = getDatabase(firebaseApp);
   onAuthStateChanged(firebaseAuth, user => {
     if(user && user.emailVerified){
       CU = { username: user.uid, name: user.displayName || user.email.split("@")[0], email: user.email };
-     set(ref(db, 'users/' + user.uid), {
-  name: user.displayName,
-  email: user.email,
-  lastLogin: new Date().toISOString()
-});
+      set(ref(db, 'users/' + user.uid), {
+        name: user.displayName,
+        email: user.email,
+        lastLogin: new Date().toISOString()
+      });
       loadApp();
-    } else if(!user){
+    } else {   // 
       showAuth();
     }
   });
@@ -104,7 +104,7 @@ async function doRegister(){
     setTimeout(()=>switchAuthTab("login"), 2000);
   } catch(e){
     const errMap = {
-      "auth/email-already-in-use": "Email already registered!",
+      "auth/email-already-in-use": "⚠️ Email already registered! Agar Google se pehle login kiya tha toh Google button use karein.",
       "auth/invalid-email": "Invalid email address!",
       "auth/weak-password": "Password is too weak!"
     };
