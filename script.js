@@ -1,59 +1,149 @@
-function switchAuthTab(tab){
+let currentUser = null;
 
-document.getElementById("loginForm").style.display="none";
-document.getElementById("registerForm").style.display="none";
+function switchTab(tab){
 
-document.querySelectorAll(".auth-tab").forEach(btn=>{
-btn.classList.remove("active");
+document.querySelectorAll(".tab-page").forEach(p=>p.classList.remove("active"));
+
+document.querySelectorAll(".nav-tab").forEach(b=>b.classList.remove("active"));
+
+document.getElementById("page-"+tab).classList.add("active");
+
+document.getElementById("tab-"+tab).classList.add("active");
+
+}
+
+
+
+function buildTopicGrid(){
+
+const topics=[...new Set(QDATA.map(q=>q.topic))];
+
+let html="";
+
+topics.forEach(t=>{
+
+html+=`
+<div class="topic-card" onclick="selectTopic('${t}')">
+
+<div class="tc-name">${t}</div>
+
+</div>
+`;
+
 });
 
-if(tab==="login"){
-document.getElementById("loginForm").style.display="block";
-document.querySelectorAll(".auth-tab")[0].classList.add("active");
-}
-
-if(tab==="register"){
-document.getElementById("registerForm").style.display="block";
-document.querySelectorAll(".auth-tab")[1].classList.add("active");
-}
+document.getElementById("topicGrid").innerHTML=html;
 
 }
 
 
 
-function doLogin(){
+let selectedTopic=null;
 
-let u=document.getElementById("loginUser").value;
-let p=document.getElementById("loginPass").value;
+function selectTopic(t){
 
-if(u==="" || p===""){
+selectedTopic=t;
 
-document.getElementById("loginMsg").innerText="enter details";
+document.getElementById("startBtn").disabled=false;
+
+}
+
+
+
+let quiz=[];
+
+let qIndex=0;
+
+let score=0;
+
+
+
+function startQuiz(){
+
+quiz=QDATA.filter(q=>q.topic===selectedTopic);
+
+qIndex=0;
+
+score=0;
+
+switchTab("quiz");
+
+loadQ();
+
+}
+
+
+
+function loadQ(){
+
+let q=quiz[qIndex];
+
+document.getElementById("qText").innerText=q.q;
+
+
+
+let html="";
+
+q.opts.forEach((o,i)=>{
+
+html+=`
+<button class="opt-btn" onclick="answer(${i})">
+
+${o}
+
+</button>
+`;
+
+});
+
+document.getElementById("optsList").innerHTML=html;
+
+}
+
+
+
+function answer(i){
+
+if(i===quiz[qIndex].ans){
+
+score++;
+
+}
+
+
+
+nextQ();
+
+}
+
+
+
+function nextQ(){
+
+qIndex++;
+
+
+
+if(qIndex>=quiz.length){
+
+alert("score: "+score);
+
+switchTab("home");
 
 return;
 
 }
 
-document.getElementById("loginMsg").innerText="login success (demo)";
+
+
+loadQ();
 
 }
 
 
 
-function doRegister(){
+document.addEventListener("DOMContentLoaded",()=>{
 
-let n=document.getElementById("regName").value;
-let u=document.getElementById("regUser").value;
-let p=document.getElementById("regPass").value;
+buildTopicGrid();
 
-if(n==="" || u==="" || p===""){
-
-document.getElementById("registerMsg").innerText="fill all fields";
-
-return;
-
-}
-
-document.getElementById("registerMsg").innerText="register success (demo)";
-
-}
+});
