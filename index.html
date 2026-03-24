@@ -1,104 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GS Practice Platform</title>
-
-<link rel="stylesheet" href="style.css">
+<title>GS Practice Platform by Gaurav Karn</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-
 <!-- AUTH SCREEN -->
-
 <div id="authScreen" class="screen active">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">🎯</div>
+      <div class="auth-logo-name">GS <span>Practice</span></div>
+      <div class="auth-logo-sub">by Gaurav Karn · UPSC GS Platform</div>
+    </div>
 
-<div class="auth-box">
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+    </div>
 
-<div class="auth-logo">
+    <div id="loginForm">
+      <input class="form-input" id="loginUser" placeholder="Username">
+      <input class="form-input" id="loginPass" type="password" placeholder="Password">
+      <button class="auth-btn" onclick="doLogin()">Login</button>
+      <div id="loginMsg"></div>
+    </div>
 
-<div class="auth-logo-icon">🎯</div>
+    <div id="registerForm" style="display:none">
+      <input class="form-input" id="regName" placeholder="Full Name">
+      <input class="form-input" id="regUser" placeholder="Username">
+      <input class="form-input" id="regPass" type="password" placeholder="Password">
+      <button class="auth-btn" onclick="doRegister()">Register</button>
+      <div id="registerMsg"></div>
+    </div>
 
-<div class="auth-logo-name">
-GS <span>Practice</span>
+  </div>
 </div>
 
-<div class="auth-logo-sub">
-UPSC GS Platform
+<!-- APP SCREEN -->
+<div id="appScreen" class="screen">
+
+<nav>
+<div class="nav-logo">GS Practice</div>
+
+<button onclick="switchTab('home')">Home</button>
+<button onclick="switchTab('leaderboard')">Leaderboard</button>
+<button onclick="switchTab('history')">History</button>
+
+<div>
+<span id="navUname"></span>
+<button onclick="doLogout()">Logout</button>
 </div>
 
-</div>
+</nav>
 
+<div id="page-home" class="tab-page active">
 
+<h2>Select Topic</h2>
 
-<div class="auth-tabs">
+<div id="topicGrid"></div>
 
-<button class="auth-tab active" onclick="switchAuthTab('login')">
-Login
-</button>
-
-<button class="auth-tab" onclick="switchAuthTab('register')">
-Register
-</button>
-
-</div>
-
-
-
-<!-- login -->
-
-<div id="loginForm">
-
-<input id="loginUser" placeholder="username">
-
-<input id="loginPass" type="password" placeholder="password">
-
-<button onclick="doLogin()">
-Login
-</button>
-
-<p id="loginMsg"></p>
-
-</div>
-
-
-
-<!-- register -->
-
-<div id="registerForm" style="display:none">
-
-<input id="regName" placeholder="name">
-
-<input id="regUser" placeholder="username">
-
-<input id="regPass" placeholder="password">
-
-<button onclick="doRegister()">
-Register
-</button>
-
-<p id="registerMsg"></p>
+<button onclick="startQuiz()">Start Quiz</button>
 
 </div>
 
+<div id="page-quiz" class="tab-page">
 
+<h2 id="qText"></h2>
+
+<div id="optsList"></div>
+
+<button onclick="checkAns()">Check</button>
+
+</div>
+
+<div id="page-leaderboard" class="tab-page">
+
+<h2>Leaderboard</h2>
+
+<div id="lbTable"></div>
+
+</div>
+
+<div id="page-history" class="tab-page">
+
+<h2>History</h2>
+
+<div id="histList"></div>
 
 </div>
 
 </div>
 
-
-<script src="questions.js"></script>
-<script type="module" src="firebase.js"></script>
 <script src="script.js"></script>
 
 </body>
-
 </html>
