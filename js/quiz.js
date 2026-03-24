@@ -28,7 +28,9 @@ function autoNext(){
     b.disabled = true;
     if(i === q.ans) b.classList.add("correct");
     else b.classList.add("dim");
-  });
+  })
+  
+  QST.sel = q.ans + 1;
   QST.fail++;
   document.getElementById("explText").textContent = q.exp;
   document.getElementById("explBox").style.display = "block";
