@@ -97,7 +97,7 @@ function pickOpt(i){
 
 function checkAns(){
   if(QST.sel===null) return;
-  stopTimer();
+  //stopTimer();
   const q=QST.qs[QST.idx];
   document.querySelectorAll(".opt-btn").forEach((b,i)=>{
     b.disabled=true; b.classList.remove("sel");
