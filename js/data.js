@@ -170,6 +170,7 @@ const QDATA = [
   {topic:"grav_waves",tn:"Gravitational Waves",level:"hard",q:"What is the name of India's proposed Gravitational Wave detector?",opts:["VIRGO","KAGRA","INDIAN LIGO — located in Hingoli, Maharashtra","GEO600"],ans:2,exp:"LIGO-India is proposed to be located in Hingoli, Maharashtra. It will form a global network with US LIGO detectors to better locate gravitational wave sources."},
   {topic:"grav_waves",tn:"Gravitational Waves",level:"upsc",q:"Which event is a classic example of a source of Gravitational Waves?",opts:["Earth's revolution around the Sun","Merger of two Black Holes","Formation of a star","Solar eclipse"],ans:1,exp:"The merger of two Black Holes (or neutron stars) is the classic source — the first detected gravitational wave was from a binary black hole merger."},
 ];
+/* ══════════════════ BIHAR SPECIAL ══════════════════ */
 
 const WRITING_Q = {
   /* ✏️ STEP 2: Naye subject ke Answer Writing questions yahan add karo
