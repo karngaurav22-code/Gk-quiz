@@ -362,3 +362,9 @@ nav {
   .tab-page { padding: 16px 12px 60px; }
   .topic-grid { grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); }
 }
+/* ══════ COPY DISABLE ══════ */
+.quiz-area, .w-q, .w-hint, .writing-card, .option-btn {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
