@@ -245,7 +245,8 @@ Return ONLY this JSON array (no markdown, no backticks):
   body: JSON.stringify({ prompt })
 });
       const data = await res.json();
-      let raw = data.content[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
+if (!res.ok) throw new Error(data.error || 'Backend error');
+let raw = data.content[0].text.trim()
       const s = raw.indexOf('['), e = raw.lastIndexOf(']');
       raw = raw.substring(s, e+1);
       const qs = JSON.parse(raw);
