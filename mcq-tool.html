@@ -240,14 +240,10 @@ Return ONLY this JSON array (no markdown, no backticks):
 
     try {
       const res = await fetch("https://gk-quiz-five.vercel.app/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 4000,
-          messages: [{ role: "user", content: prompt }]
-        })
-      });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt })
+});
       const data = await res.json();
       let raw = data.content[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
       const s = raw.indexOf('['), e = raw.lastIndexOf(']');
