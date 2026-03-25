@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCQ Generator → GitHub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap');
+  :root {
+    --bg: #090E18; --card: #0F1623; --card2: #161E2E; --card3: #1C2538;
+    --border: rgba(255,255,255,0.09);
+    --green: #2ECC71; --blue: #3B82F6; --accent: #6366F1;
+    --yellow: #F59E0B; --red: #E74C3C;
+    --text: #F0F4FF; --text2: #8B96B0; --text3: #3D4A65;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: 'Sora', sans-serif; color: var(--text); min-height: 100vh; padding: 20px 16px 80px; }
+
+  .header { text-align: center; margin-bottom: 24px; padding-top: 16px; }
+  .header h1 { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #6366F1, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
+  .header p { font-size: 13px; color: var(--text2); }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; max-width: 720px; margin: 0 auto 16px; }
+
+  .sec-label { font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { font-size: 10px; color: var(--text2); letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 6px; font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 12px; background: var(--card2); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); font-size: 13px; font-family: 'Sora', sans-serif; outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: rgba(99,102,241,0.5); }
+  .form-group textarea { resize: vertical; min-height: 150px; line-height: 1.6; }
+
+  .token-wrap { position: relative; }
+  .token-wrap input { padding-right: 44px; }
+  .token-eye { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text3); cursor: pointer; font-size: 16px; }
+
+  .hint { font-size: 11px; color: var(--text3); margin-top: 6px; line-height: 1.5; }
+  .hint.warn { color: var(--yellow); }
+
+  .btn { width: 100%; padding: 14px; border-radius: 12px; border: none; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, #6366F1, #3B82F6); color: #fff; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(99,102,241,0.4); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn-green { background: linear-gradient(135deg, #2ECC71, #16a34a); color: #fff; margin-top: 12px; }
+  .btn-green:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(46,204,113,0.4); }
+  .btn-green:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .status { display: none; padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-top: 14px; text-align: center; line-height: 1.5; }
+  .status.loading { display: block; background: rgba(59,130,246,0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+  .status.success { display: block; background: rgba(46,204,113,0.1); color: var(--green); border: 1px solid rgba(46,204,113,0.2); }
+  .status.error { display: block; background: rgba(231,76,60,0.1); color: var(--red); border: 1px solid rgba(231,76,60,0.2); }
+
+  /* Preview */
+  .output-area { display: none; }
+  .preview-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+  .preview-card { background: var(--card2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .preview-q { font-size: 13px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+  .preview-opts { display: flex; flex-direction: column; gap: 6px; }
+  .preview-opt { font-size: 12px; padding: 7px 12px; border-radius: 8px; background: var(--card3); color: var(--text2); display: flex; align-items: center; gap: 8px; }
+  .preview-opt.correct { background: rgba(46,204,113,0.1); color: var(--green); border: 1px solid rgba(46,204,113,0.25); }
+  .opt-ltr { font-size: 10px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; background: var(--card); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .preview-exp { font-size: 11px; color: var(--text3); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+
+  .output-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .q-badge { font-size: 12px; color: var(--green); background: rgba(46,204,113,0.1); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(46,204,113,0.2); }
+
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(59,130,246,0.3); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .saved-token-bar { display: none; background: rgba(46,204,113,0.08); border: 1px solid rgba(46,204,113,0.2); border-radius: 10px; padding: 10px 14px; font-size: 12px; color: var(--green); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+  .clear-token { background: none; border: none; color: var(--red); font-size: 11px; cursor: pointer; font-family: 'Sora', sans-serif; }
+
+  @media(max-width:480px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>✍️ Notes → MCQ → GitHub</h1>
+  <p>Notes likho → AI MCQ banayega → data.js automatically update!</p>
+</div>
+
+<!-- Token Card -->
+<div class="card" id="tokenCard">
+  <div class="sec-label">GitHub Token (Sirf Pehli Baar)</div>
+  <div id="savedTokenBar" style="display:none" class="saved-token-bar">
+    ✅ Token saved hai (browser mein)
+    <button class="clear-token" onclick="clearToken()">✕ Hatao</button>
+  </div>
+  <div id="tokenInputWrap">
+    <div class="form-group">
+      <label>Personal Access Token</label>
+      <div class="token-wrap">
+        <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <button class="token-eye" onclick="toggleTokenVisibility()">👁</button>
+      </div>
+      <div class="hint warn">⚠️ Token sirf tumhare browser mein save hoga — kisi ko share mat karo!</div>
+    </div>
+    <button class="btn btn-primary" onclick="saveToken()">🔐 Token Save Karo</button>
+  </div>
+</div>
+
+<!-- MCQ Generator -->
+<div class="card">
+  <div class="sec-label">Topic Info</div>
+  <div class="form-row" style="margin-bottom:14px">
+    <div class="form-group" style="margin:0">
+      <label>Topic Name</label>
+      <input type="text" id="topicName" placeholder="e.g. DNA & RNA">
+    </div>
+    <div class="form-group" style="margin:0">
+      <label>Topic ID</label>
+      <input type="text" id="topicId" placeholder="e.g. dna">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Notes / One-liners</label>
+    <textarea id="notesInput" placeholder="Har line ek fact likho:
+
+DNA double helix Watson & Crick ne 1953 mein discover kiya
+DNA mein 4 bases: Adenine, Thymine, Guanine, Cytosine
+RNA mein Thymine ki jagah Uracil hota hai
+Mitochondria powerhouse of the cell hai"></textarea>
+    <div class="hint">💡 Har line se ek MCQ banega</div>
+  </div>
+
+  <div class="form-group">
+    <label>Kitne MCQ?</label>
+    <select id="qCount">
+      <option value="5">5 Questions</option>
+      <option value="10" selected>10 Questions</option>
+      <option value="15">15 Questions</option>
+      <option value="20">20 Questions</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" id="generateBtn" onclick="generateMCQ()">
+    ⚡ MCQ Generate Karo
+  </button>
+  <div class="status" id="genStatus"></div>
+</div>
+
+<!-- Preview + Upload -->
+<div class="card output-area" id="outputArea">
+  <div class="output-header">
+    <div class="sec-label" style="margin:0">Preview</div>
+    <span class="q-badge" id="qBadge">0 questions</span>
+  </div>
+  <div class="preview-list" id="previewList"></div>
+
+  <button class="btn btn-green" id="uploadBtn" onclick="uploadToGitHub()">
+    🚀 GitHub Pe Upload Karo → data.js Update Hoga
+  </button>
+  <div class="status" id="uploadStatus"></div>
+</div>
+
+<script>
+  const REPO = 'karngaurav22-code/Gk-quiz';
+  const FILE_PATH = 'js/data.js';
+  let generatedQuestions = [];
+
+  // Token management
+  window.onload = () => {
+    const saved = localStorage.getItem('gh_token');
+    if (saved) {
+      document.getElementById('savedTokenBar').style.display = 'flex';
+      document.getElementById('tokenInputWrap').style.display = 'none';
+    }
+  };
+
+  function saveToken() {
+    const token = document.getElementById('tokenInput').value.trim();
+    if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+      alert('Valid GitHub token enter karo (ghp_ se shuru hota hai)');
+      return;
+    }
+    localStorage.setItem('gh_token', token);
+    document.getElementById('savedTokenBar').style.display = 'flex';
+    document.getElementById('tokenInputWrap').style.display = 'none';
+  }
+
+  function clearToken() {
+    localStorage.removeItem('gh_token');
+    document.getElementById('tokenInput').value = '';
+    document.getElementById('savedTokenBar').style.display = 'none';
+    document.getElementById('tokenInputWrap').style.display = 'block';
+  }
+
+  function toggleTokenVisibility() {
+    const inp = document.getElementById('tokenInput');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  }
+
+  function getToken() {
+    return localStorage.getItem('gh_token') || document.getElementById('tokenInput').value.trim();
+  }
+
+  // Generate MCQ
+  async function generateMCQ() {
+    const topicName = document.getElementById('topicName').value.trim();
+    const topicId = document.getElementById('topicId').value.trim().toLowerCase().replace(/\s+/g,'_');
+    const notes = document.getElementById('notesInput').value.trim();
+    const qCount = document.getElementById('qCount').value;
+
+    if (!topicName) { showStatus('genStatus', 'error', 'Topic Name bharo!'); return; }
+    if (!topicId) { showStatus('genStatus', 'error', 'Topic ID bharo!'); return; }
+    if (!notes) { showStatus('genStatus', 'error', 'Notes likho!'); return; }
+
+    document.getElementById('generateBtn').disabled = true;
+    document.getElementById('outputArea').style.display = 'none';
+    showStatus('genStatus', 'loading', '<span class="spinner"></span> AI MCQ bana raha hai...');
+
+    const prompt = `You are an expert MCQ creator for UPSC/competitive exams.
+
+Create exactly ${qCount} high-quality MCQ questions based on these notes about "${topicName}":
+
+${notes}
+
+STRICT RULES:
+- Each question must have exactly 4 options
+- Only ONE correct answer
+- Write a clear brief explanation for correct answer
+- Make wrong options plausible
+- Mix question styles
+
+Return ONLY this JSON array (no markdown, no backticks):
+[
+  {
+    "q": "Question?",
+    "opts": ["A", "B", "C", "D"],
+    "ans": 0,
+    "exp": "Explanation"
+  }
+]`;
+
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 4000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+      const data = await res.json();
+      let raw = data.content[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
+      const s = raw.indexOf('['), e = raw.lastIndexOf(']');
+      raw = raw.substring(s, e+1);
+      const qs = JSON.parse(raw);
+
+      generatedQuestions = qs.map(q => ({
+        topic: topicId, tn: topicName, level: 'medium',
+        q: q.q, opts: q.opts, ans: q.ans, exp: q.exp || ''
+      }));
+
+      showStatus('genStatus', 'success', `✅ ${generatedQuestions.length} MCQ ready! Preview dekho aur GitHub pe upload karo.`);
+      renderPreview(generatedQuestions);
+      document.getElementById('outputArea').style.display = 'block';
+
+    } catch(err) {
+      showStatus('genStatus', 'error', '❌ Error: ' + err.message);
+    }
+    document.getElementById('generateBtn').disabled = false;
+  }
+
+  function renderPreview(questions) {
+    document.getElementById('qBadge').textContent = questions.length + ' questions';
+    document.getElementById('previewList').innerHTML = questions.map((q,i) => `
+      <div class="preview-card">
+        <div class="preview-q">Q${i+1}. ${esc(q.q)}</div>
+        <div class="preview-opts">
+          ${q.opts.map((o,j) => `<div class="preview-opt ${j===q.ans?'correct':''}"><span class="opt-ltr">${String.fromCharCode(65+j)}</span>${esc(o)}</div>`).join('')}
+        </div>
+        <div class="preview-exp">💡 ${esc(q.exp)}</div>
+      </div>`).join('');
+  }
+
+  // Upload to GitHub
+  async function uploadToGitHub() {
+    const token = getToken();
+    if (!token) { showStatus('uploadStatus', 'error', '❌ Pehle token save karo!'); return; }
+    if (!generatedQuestions.length) { showStatus('uploadStatus', 'error', '❌ Pehle MCQ generate karo!'); return; }
+
+    document.getElementById('uploadBtn').disabled = true;
+    showStatus('uploadStatus', 'loading', '<span class="spinner"></span> GitHub se data.js fetch kar raha hai...');
+
+    try {
+      // Step 1: Get current data.js
+      const fileRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+        headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      const fileData = await fileRes.json();
+      if (!fileData.content) throw new Error('data.js nahi mila — token ya repo check karo');
+
+      const currentContent = atob(fileData.content.replace(/\n/g, ''));
+      const sha = fileData.sha;
+
+      showStatus('uploadStatus', 'loading', '<span class="spinner"></span> Questions add kar raha hai...');
+
+      // Step 2: Append new questions
+      const topicId = generatedQuestions[0].topic;
+      const topicName = generatedQuestions[0].tn;
+      const varName = topicId.toUpperCase().replace(/-/g,'_') + '_Q_' + Date.now();
+
+      const newCode = `\n\n// ── ${topicName} (${generatedQuestions.length} questions) — Auto Added ──\nconst ${varName} = [\n${generatedQuestions.map(q => {
+        const opts = q.opts.map(o => `"${escJS(o)}"`).join(', ');
+        return `  { topic:"${escJS(q.topic)}", tn:"${escJS(q.tn)}", level:"medium", q:"${escJS(q.q)}", opts:[${opts}], ans:${q.ans}, exp:"${escJS(q.exp)}" }`;
+      }).join(',\n')}\n];\nQDATA.push(...${varName});`;
+
+      const updatedContent = currentContent + newCode;
+
+      // Step 3: Push to GitHub
+      const pushRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: `Add ${generatedQuestions.length} MCQs: ${topicName}`,
+          content: btoa(unescape(encodeURIComponent(updatedContent))),
+          sha: sha
+        })
+      });
+
+      if (!pushRes.ok) {
+        const err = await pushRes.json();
+        throw new Error(err.message || 'Upload failed');
+      }
+
+      showStatus('uploadStatus', 'success', `🎉 ${generatedQuestions.length} questions data.js mein add ho gaye! Site 2-3 min mein update hogi.`);
+
+    } catch(err) {
+      showStatus('uploadStatus', 'error', '❌ Error: ' + err.message);
+    }
+    document.getElementById('uploadBtn').disabled = false;
+  }
+
+  function showStatus(id, type, msg) {
+    const el = document.getElementById(id);
+    el.className = 'status ' + type;
+    el.innerHTML = msg;
+  }
+
+  function esc(s) { return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function escJS(s) { return String(s||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,' '); }
+</script>
+</body>
+</html>
