@@ -239,7 +239,7 @@ Return ONLY this JSON array (no markdown, no backticks):
 ]`;
 
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("https://gk-quiz-five.vercel.app/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
