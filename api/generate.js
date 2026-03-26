@@ -31,7 +31,10 @@ export default async function handler(req, res) {
       });
     }
 
-    const text = data.candidates[0].content.parts[0].text;
+    if (!data.candidates || !data.candidates[0]) {
+  throw new Error('Gemini empty response: ' + JSON.stringify(data));
+}
+const text = data.candidates[0].content.parts[0].text;
     return res.status(200).json({ content: [{ text }] });
 
   } catch (err) {
