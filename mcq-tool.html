@@ -246,7 +246,10 @@ Return ONLY this JSON array (no markdown, no backticks):
 });
       const data = await res.json();
 if (!res.ok) throw new Error(data.error || 'Backend error');
-let raw = data.content[0].text.trim()
+      if (!data || !data.content || !data.content[0]) {
+  throw new Error('Backend error: ' + JSON.stringify(data));
+}
+let raw = data.content[0].text.trim();
       const s = raw.indexOf('['), e = raw.lastIndexOf(']');
       raw = raw.substring(s, e+1);
       const qs = JSON.parse(raw);
