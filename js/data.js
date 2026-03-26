@@ -91,14 +91,446 @@ const QDATA = [
   {topic:"ecology_abiotic",tn:"Ecology: Abiotic",level:"hard",q:"Chaperonins are proteins that:",opts:["Cause protein denaturation","Help other proteins maintain their structure and avoid denaturation at high temperature","Break down food molecules","Store water in desert plants"],ans:1,exp:"Chaperonins are proteins (like Proline) that act as shields and help other proteins maintain their structure, avoiding denaturation that occurs due to high temperature exposure."},
   {topic:"ecology_abiotic",tn:"Ecology: Abiotic",level:"upsc",q:"Carnivorous plants like Nepenthes, Sundew, Venus Flytrap are adaptations to:",opts:["Hot and dry conditions","Saline conditions","Nutrient-poor soil conditions","Aquatic conditions"],ans:2,exp:"Carnivorous plants (Nepenthes, Sundew, Venus Flytrap, Pitcher plant) are adaptations to nutrient-poor soil conditions — they catch insects to supplement their nutrition."},
 
-  /* ════════════════════════════════════════════════════════
-     ✏️  NAYA SUBJECT YAHAN SE ADD KARO — EXAMPLE NEECHE HAI
-     Topic ID: "space_tech" → apni marzi ka unique id dena
+  /* ════════════════════════════════════════════════════════*/
+  // ══════════════════════════════════════════════════════════════
+//  BIHAR GK — SAMANYA PARICHAY  (Add to QDATA array)
+//  Topic ID: "bihar_gk"
+// ══════════════════════════════════════════════════════════════
 
-  {topic:"space_tech",tn:"Space Technology",level:"easy",q:"What is ISRO?",opts:["Indian Space Research Organisation","Indian Science Research Organisation","International Space Research Organisation","Indian Satellite Research Organisation"],ans:0,exp:"ISRO = Indian Space Research Organisation, founded in 1969. It is India's national space agency."},
-  {topic:"space_tech",tn:"Space Technology",level:"medium",q:"...",opts:["A","B","C","D"],ans:0,exp:"..."},
+// ── PAGE 1: NAAMKARAN & BHOUGOLIK STHITI ──
 
-     Aur neeche WRITING_Q aur TOPICS_CFG mein bhi add karna mat bhoolna!
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"In which century did the region get the name 'Bihar' due to Buddhist Viharas?",
+   opts:["8th century","10th century","12th century","14th century"],
+   ans:2,
+   exp:"In the 12th century, due to the large number of Buddhist Viharas (monasteries) in this region, it came to be called Bihar. These Viharas were prayer places where Buddhist monks (Bhikshu) resided."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"In which direction of India is Bihar geographically located?",
+   opts:["North-West India","South-East India","North-East India","Central India"],
+   ans:2,
+   exp:"Bihar is located in the North-East part of India (Uttar-Purva Bharat). It shares its northern border with Nepal and is part of the Indo-Gangetic Plain."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What is the northern-most latitude of Bihar?",
+   opts:["24°20'10\" N","25°15'30\" N","27°31'15\" N","26°45'00\" N"],
+   ans:2,
+   exp:"Bihar's northern-most point is at 27°31'15\" N latitude. Its southern-most point is at 24°20'10\" N. Total latitudinal extent: 24°20'10\"N to 27°31'15\"N."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What is the western-most longitude of Bihar?",
+   opts:["80°15'30\" E","83°19'50\" E","85°30'20\" E","88°17'40\" E"],
+   ans:1,
+   exp:"Bihar's western-most longitude is 83°19'50\" E. Its eastern-most longitude is 88°17'40\" E. Total longitudinal extent: 83°19'50\"E to 88°17'40\"E."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is the length of Bihar from North to South?",
+   opts:["245 km","345 km","445 km","483 km"],
+   ans:1,
+   exp:"Bihar's length from North to South (Uttar se Dakshin) is 345 km. Its width from East to West is 483 km."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is the width of Bihar from East to West?",
+   opts:["345 km","400 km","450 km","483 km"],
+   ans:3,
+   exp:"Bihar's width from East to West (Purva se Pashchim) is 483 km. Its length from North to South is 345 km. The shape of the state is rectangular."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What is the shape (Aakruti) of Bihar state?",
+   opts:["Triangular (Tribhujaakar)","Circular (Vrittakar)","Rectangular (Aayatakar)","Irregular (Asamaan)"],
+   ans:2,
+   exp:"The shape of Bihar is Rectangular (Aayatakar). Its N-S length is 345 km and E-W width is 483 km, forming a roughly rectangular outline."},
+
+// ── PAGE 1: KEY HISTORICAL DATES ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"On which date and where was the announcement made to create a separate Bihar province?",
+   opts:["22 March 1912 — Patna","1 April 1912 — Delhi","12 December 1911 — Delhi Durbar","15 August 1912 — Calcutta"],
+   ans:2,
+   exp:"On 12 December 1911, at the Delhi Durbar, the announcement was made to create a separate Bihar province. The formal notification was issued on 22 March 1912, and the province was constituted on 1 April 1912."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"On which date was the formal notification/announcement (Adhisoochna) for Bihar province (including Odisha) issued?",
+   opts:["12 December 1911","1 April 1912","22 March 1912","1 April 1936"],
+   ans:2,
+   exp:"On 22 March 1912, the formal notification for the creation of Bihar (including Odisha) province was issued. This is why 22 March is celebrated as Bihar Diwas (Bihar Foundation Day)."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"On 1 April 1912, which two regions were combined to form one province?",
+   opts:["Bihar and Bengal","Bihar and Jharkhand","Bihar and Odisha","Bihar and UP"],
+   ans:2,
+   exp:"On 1 April 1912, Bihar and Odisha (Udissa) were constituted together as one province. They were later separated on 1 April 1936 into two different states."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"In which year did Bihar and Odisha become two separate states?",
+   opts:["1912","1920","1930","1936"],
+   ans:3,
+   exp:"On 1 April 1936, Bihar and Odisha were separated and became two distinct states. Until then, they had been governed together as a single province since 1912."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"On 15 November 2000, what percentage of Bihar's land area became part of the new Jharkhand state?",
+   opts:["25%","36%","46%","56%"],
+   ans:2,
+   exp:"On 15 November 2000, Jharkhand was carved out of Bihar with 46% of Bihar's land area. Jharkhand became India's 28th state. This was the last major division of Bihar."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Jharkhand was created as which numbered state of India?",
+   opts:["25th","26th","27th","28th"],
+   ans:3,
+   exp:"Jharkhand became India's 28th state on 15 November 2000 after being carved out of Bihar with 46% of Bihar's geographical area."},
+
+// ── PAGE 2: AREA, POPULATION, ADMINISTRATIVE DIVISION ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"When is Bihar Diwas (Bihar Foundation Day) celebrated every year?",
+   opts:["1 April","15 November","12 December","22 March"],
+   ans:3,
+   exp:"Bihar Diwas is celebrated on 22 March every year. This date marks the formal notification for the creation of Bihar province in 1912."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is the total area of Bihar?",
+   opts:["74,163 sq km","84,163 sq km","94,163 sq km","1,04,163 sq km"],
+   ans:2,
+   exp:"Bihar's total area is 94,163 sq km, which is 2.86% of India's total geographical area. It is India's 12th largest state by area."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"Bihar constitutes what percentage of India's total geographical area?",
+   opts:["1.86%","2.50%","2.86%","3.50%"],
+   ans:2,
+   exp:"Bihar's area (94,163 sq km) is 2.86% of India's total area. Despite this, it is India's 3rd most populous state with 8.60% of India's population."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"By area, Bihar is India's which largest state?",
+   opts:["8th","10th","12th","15th"],
+   ans:2,
+   exp:"Bihar is India's 12th largest state by area (94,163 sq km). However, by population it is India's 3rd largest state — showing a very high population density."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What was Bihar's total population according to Census 2011?",
+   opts:["8,40,99,452","9,40,99,452","10,40,99,452","11,40,99,452"],
+   ans:2,
+   exp:"As per Census 2011, Bihar's total population was 10,40,99,452 (approximately 10.41 crore), which is 8.60% of India's total population."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Bihar's population is what percentage of India's total population (Census 2011)?",
+   opts:["6.60%","7.60%","8.60%","9.60%"],
+   ans:2,
+   exp:"Bihar's population (10.41 crore) is 8.60% of India's total population as per Census 2011. Despite being only 2.86% of India's area, it holds 8.60% of population — indicating very high density."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"By population, Bihar is India's which largest state?",
+   opts:["2nd","3rd","4th","5th"],
+   ans:1,
+   exp:"Bihar is India's 3rd largest state by population. Despite being 12th by area, its high population density makes it the 3rd most populous state in India."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is Bihar's altitude above sea level?",
+   opts:["53 feet (16 metres)","112 feet (34 metres)","173 feet (53 metres)","245 feet (75 metres)"],
+   ans:2,
+   exp:"Bihar's average altitude above sea level is 173 feet (53 metres). This relatively low altitude is consistent with its position in the flat Indo-Gangetic plain."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is the average annual rainfall of Bihar?",
+   opts:["82 cm","97 cm","112 cm","135 cm"],
+   ans:2,
+   exp:"Bihar's average annual rainfall is 112 cm (centimetres). The rainfall is primarily received during the South-West monsoon season (June–September)."},
+
+// ── PAGE 2: PRASHASANIK VIBHAJAN (ADMINISTRATIVE DIVISIONS) ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"How many Pramandals (Divisions) does Bihar have?",
+   opts:["7","8","9","10"],
+   ans:2,
+   exp:"Bihar has 9 Pramandals (Divisions): Saran, Tirhut, Darbhanga, Koshi, Purnia, Patna, Magadh, Munger, and Bhagalpur."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"How many districts does Bihar have? Which is the 38th (latest) district?",
+   opts:["36 — Sheikhpura","37 — Arwal","38 — Arwal","40 — Saharsa"],
+   ans:2,
+   exp:"Bihar has 38 districts, and the 38th (latest) district is Arwal, carved out of Jehanabad district. Bihar also has 40 police districts (38 regular + Bagha and Nawgachia)."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Anumandals (Sub-divisions) are there in Bihar?",
+   opts:["88","101","154","534"],
+   ans:1,
+   exp:"Bihar has 101 Anumandals (Sub-divisions). Administrative hierarchy: 9 Pramandals → 38 Districts → 101 Anumandals → 534 Prakhands → 8067 Panchayats."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Prakhands (Blocks) are there in Bihar?",
+   opts:["345","450","534","601"],
+   ans:2,
+   exp:"Bihar has 534 Prkhand-sah-Anchal (Blocks). The administrative hierarchy goes: Pramandal → District → Anumandal → Prakhand → Panchayat."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Panchayats are there in Bihar?",
+   opts:["6067","7067","8067","9067"],
+   ans:2,
+   exp:"Bihar has 8067 Panchayats. This is the grass-root level of governance in rural Bihar. Urban governance includes 19 Nagar Nigams, 88 Nagar Parishads, and 154 Nagar Panchayats."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Nagar Nigams (Municipal Corporations) are in Bihar, and which is the 19th?",
+   opts:["17 — Darbhanga","18 — Muzaffarpur","19 — Saharsa","20 — Araria"],
+   ans:2,
+   exp:"Bihar has 19 Nagar Nigams (Municipal Corporations). Saharsa is the 19th and most recently added Nagar Nigam. There are also 88 Nagar Parishads and 154 Nagar Panchayats."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Nagar Parishads (Municipal Councils) are there in Bihar?",
+   opts:["68","78","88","98"],
+   ans:2,
+   exp:"Bihar has 88 Nagar Parishads (Municipal Councils). Urban local bodies in Bihar: 19 Nagar Nigams + 88 Nagar Parishads + 154 Nagar Panchayats."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Nagar Panchayats are there in Bihar?",
+   opts:["124","134","144","154"],
+   ans:3,
+   exp:"Bihar has 154 Nagar Panchayats. These are the smallest urban local bodies. Total urban local bodies: 19 Nagar Nigams + 88 Nagar Parishads + 154 Nagar Panchayats."},
+
+// ── PAGE 2: BIHAR KI VIDHAYIKA ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Police Districts does Bihar have and what makes it more than the regular 38?",
+   opts:["39 — Bagha added","40 — Bagha and Nawgachia added","41 — Three new districts added","42 — Four new police districts"],
+   ans:1,
+   exp:"Bihar has 40 police districts. In addition to the regular 38 civil districts, Bagha and Nawgachia are separate police districts. This is done for better law enforcement management."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What type of legislature (Vidhan Mandal) does Bihar have?",
+   opts:["Unicameral (Ek-Sadaniya)","Bicameral (Dwi-Sadaniya)","Federal","Presidential"],
+   ans:1,
+   exp:"Bihar has a Bicameral (Dwi-Sadaniya) legislature, meaning it has two houses: Vidhan Sabha (Lower House) and Vidhan Parishad (Upper House). Only 6 Indian states have bicameral legislatures."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"How many seats does Bihar Vidhan Sabha (State Legislative Assembly) have?",
+   opts:["220","232","243","260"],
+   ans:2,
+   exp:"Bihar Vidhan Sabha has 243 seats in total. Out of these, 40 seats are reserved — 38 for Scheduled Castes (SC) and 2 for Scheduled Tribes (ST: Katoria and Minhali constituencies)."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many seats does Bihar Vidhan Parishad (State Legislative Council) have?",
+   opts:["55","65","75","85"],
+   ans:2,
+   exp:"Bihar Vidhan Parishad has 75 seats. It is the upper house of Bihar's bicameral legislature. Members have staggered terms and are elected/nominated through various constituencies."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"How many Lok Sabha (Parliamentary) constituencies are there in Bihar?",
+   opts:["36","38","40","42"],
+   ans:2,
+   exp:"Bihar has 40 Lok Sabha seats, making it one of the most politically significant states. It also has 16 Rajya Sabha seats."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Rajya Sabha seats does Bihar have?",
+   opts:["12","14","16","18"],
+   ans:2,
+   exp:"Bihar has 16 Rajya Sabha seats. Lok Sabha seats: 40. Rajya Sabha seats: 16. Total Parliamentary representation: 56 seats from Bihar."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"In Bihar Vidhan Sabha, how many seats are reserved for Scheduled Castes (SC) and Scheduled Tribes (ST) respectively?",
+   opts:["35 SC + 5 ST","38 SC + 2 ST","36 SC + 4 ST","40 SC + 0 ST"],
+   ans:1,
+   exp:"Out of 40 reserved seats in Bihar Vidhan Sabha: 38 are reserved for Scheduled Castes (SC) and 2 for Scheduled Tribes (ST) — specifically Katoria and Minhali constituencies."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"How many Lok Sabha seats in Bihar are reserved for Scheduled Castes (SC), and in which constituencies?",
+   opts:["4 — Sasaram, Hajipur, Samastipur, Gaya","6 — Gopalganj, Hajipur, Samastipur, Jamui, Gaya, Sasaram","5 — Patna, Gaya, Bhagalpur, Muzaffarpur, Purnia","3 — Hajipur, Gaya, Sasaram"],
+   ans:1,
+   exp:"6 Lok Sabha seats in Bihar are reserved for SC: Gopalganj, Hajipur, Samastipur, Jamui, Gaya, and Sasaram. There are no ST-reserved Lok Sabha seats in Bihar."},
+
+// ── PAGE 3: SEEMA (BORDERS) ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"Which country shares Bihar's northern border?",
+   opts:["China","Bangladesh","Bhutan","Nepal"],
+   ans:3,
+   exp:"Nepal shares Bihar's northern border. 7 districts of Bihar share border with Nepal: Pashchim Champaran, Purvi Champaran, Sitamarhi, Madhubani, Supaul, Araria, and Kishanganj."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Bihar districts share border with Nepal, and which is the easternmost among them?",
+   opts:["5 — Madhubani","6 — Supaul","7 — Kishanganj","8 — Araria"],
+   ans:2,
+   exp:"7 Bihar districts share border with Nepal. The easternmost is Kishanganj. The full list: Pashchim Champaran, Purvi Champaran, Sitamarhi, Madhubani, Supaul, Araria, Kishanganj."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"Which state shares Bihar's southern border?",
+   opts:["Madhya Pradesh","Chhattisgarh","Odisha","Jharkhand"],
+   ans:3,
+   exp:"Jharkhand shares Bihar's southern border. 8 districts of Bihar share border with Jharkhand: Rohtas, Aurangabad, Gaya, Nawada, Jamui, Banka, Bhagalpur, Katihar."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Bihar districts share border with Jharkhand?",
+   opts:["6","7","8","9"],
+   ans:2,
+   exp:"8 Bihar districts share border with Jharkhand (south): Rohtas, Aurangabad, Gaya, Nawada, Jamui, Banka, Bhagalpur, and Katihar."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"Which state shares Bihar's eastern border?",
+   opts:["Assam","Odisha","West Bengal","Sikkim"],
+   ans:2,
+   exp:"West Bengal (Paschim Bangal) shares Bihar's eastern border. Only 3 Bihar districts share this border: Kishanganj, Purnia, and Katihar."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many Bihar districts share border with West Bengal?",
+   opts:["2","3","4","5"],
+   ans:1,
+   exp:"Only 3 Bihar districts share border with West Bengal: Kishanganj, Purnia, and Katihar. West Bengal lies on Bihar's eastern side."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"Which state shares Bihar's western border?",
+   opts:["Rajasthan","Madhya Pradesh","Haryana","Uttar Pradesh"],
+   ans:3,
+   exp:"Uttar Pradesh shares Bihar's western border. 8 districts of Bihar share this border: Rohtas, Kaimur, Buxar, Bhojpur, Saran, Siwan, Gopalganj, and Pashchim Champaran."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"Which Bihar district shares border with BOTH Nepal (north) AND West Bengal (east)?",
+   opts:["Araria","Supaul","Kishanganj","Purnia"],
+   ans:2,
+   exp:"Kishanganj is unique — it shares border with Nepal (north) and West Bengal (east). It is also close to the Chicken's Neck corridor and is a strategically important district."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"Which Bihar district shares border with BOTH Jharkhand (south) AND West Bengal (east)?",
+   opts:["Banka","Bhagalpur","Katihar","Purnia"],
+   ans:2,
+   exp:"Katihar shares border with both Jharkhand (south) and West Bengal (east). It also borders Purnia. This makes it a tri-junction district of sorts with multiple state borders."},
+
+// ── PAGE 3: RAJKIYA PRATEEK (STATE SYMBOLS) ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is Bihar's state emblem (Rajkiya Chinh)?",
+   opts:["Peepal tree","Bodhi tree (Bodhi Vriksha)","Lotus flower","Marigold flower"],
+   ans:1,
+   exp:"Bihar's state emblem is the Bodhi tree (Bodhi Vriksha). It is located in Bodh Gaya and is the tree under which Gautama Buddha attained enlightenment, making it deeply significant."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is Bihar's first (primary) official state language?",
+   opts:["Maithili","Bhojpuri","Hindi","Urdu"],
+   ans:2,
+   exp:"Hindi is the first/primary official language of Bihar. Urdu is the second official language. Maithili is recognized in the 8th Schedule of the Constitution but is not the official state language."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is Bihar's second official state language?",
+   opts:["Maithili","Bhojpuri","Sanskrit","Urdu"],
+   ans:3,
+   exp:"Urdu is the second official language of Bihar. Hindi is the primary official language. Bihar has a significant Urdu-speaking Muslim population, which is why Urdu holds official status."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is Bihar's state tree (Rajkiya Vriksha)?",
+   opts:["Banyan","Neem","Peepal","Ashoka"],
+   ans:2,
+   exp:"Peepal (Ficus religiosa) is Bihar's state tree. It is a sacred tree in both Hindu and Buddhist traditions. The Bodhi tree (under which Buddha attained enlightenment) is also a Peepal tree."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"easy",
+   q:"What is Bihar's state flower (Rajkiya Pushpa)?",
+   opts:["Lotus","Rose","Marigold (Genda)","Jasmine"],
+   ans:2,
+   exp:"Genda (Marigold) is Bihar's state flower. Marigold is widely used in religious and cultural ceremonies across Bihar. It is also economically important for floriculture in the state."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What is Bihar's current state animal, and what was it before 2013?",
+   opts:["Now: Tiger; Before: Lion","Now: Elephant; Before: Bear","Now: Bull (Bail); Before: Bear (Reech)","Now: Deer; Before: Bull"],
+   ans:2,
+   exp:"Bihar's current state animal is Bull (Bail), changed in 2013. Before 2013, it was Bear (Reech). The change was made to better represent the agrarian identity of Bihar."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What is Bihar's current state bird, and what was it before 2013?",
+   opts:["Now: Peacock; Before: Parrot","Now: Sparrow (Gauraiya); Before: Dove (Fakhta)","Now: Crane; Before: Sparrow","Now: Kingfisher; Before: Crane"],
+   ans:1,
+   exp:"Bihar's current state bird is Gauraiya (House Sparrow), changed in 2013. Before 2013, it was Fakhta (Dove/Turtle Dove). The sparrow was chosen to promote conservation of this declining species."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"What is Bihar's state fish (Rajkiya Machhli)?",
+   opts:["Rohu","Catla","Mangur (Catfish)","Hilsa"],
+   ans:2,
+   exp:"Mangur (Walking Catfish / Clarias batrachus) is Bihar's state fish. It is a freshwater fish commonly found in ponds and rivers of Bihar and has cultural and economic significance in the state."},
+
+// ── PAGE 3: BIHAR RAJKIYA GEET ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Who wrote (lyricist) Bihar's state song 'Mere Bharat ke Kanth Haar...'?",
+   opts:["Ramdhari Singh Dinkar","Fanishwar Nath Renu","Satya Narayan","Nagarjun"],
+   ans:2,
+   exp:"Bihar's state song 'Mere Bharat ke Kanth Haar, Tujhko Sat Sat Vandan Bihar...' was written by Satya Narayan. It was given official recognition in the year 2012."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"Who composed the music for Bihar's state song, and in which year was it officially recognised?",
+   opts:["Bismillah Khan — 2008","Hari Prasad Chaurasia & Shivkumar Sharma — 2012","A.R. Rahman — 2015","Ravi Shankar — 2010"],
+   ans:1,
+   exp:"Bihar's state song music was composed jointly by Hari Prasad Chaurasia (flautist) and Shivkumar Sharma (santoor maestro). It received official recognition as state song in 2012."},
+
+// ── PAGE 4: PRAMANDAL AND DISTRICTS TABLE ──
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many districts are there in Saran Pramandal?",
+   opts:["2","3","4","5"],
+   ans:1,
+   exp:"Saran Pramandal has 3 districts: Saran, Siwan, and Gopalganj. It is located in the western part of Bihar, bordering Uttar Pradesh."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Which Pramandal has the most districts (6) and includes Muzaffarpur?",
+   opts:["Patna","Munger","Tirhut","Koshi"],
+   ans:2,
+   exp:"Tirhut Pramandal has 6 districts: Pashchim Champaran, Purvi Champaran, Muzaffarpur, Vaishali, Sitamarhi, and Shivhar. Patna and Munger also have 6 districts each."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Which 3 districts form Darbhanga Pramandal?",
+   opts:["Darbhanga, Madhubani, Supaul","Darbhanga, Madhubani, Samastipur","Darbhanga, Sitamarhi, Madhubani","Darbhanga, Samastipur, Begusarai"],
+   ans:1,
+   exp:"Darbhanga Pramandal consists of 3 districts: Madhubani, Darbhanga, and Samastipur. This region is known as Mithilanchal and is famous for Madhubani painting."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Which 3 districts form Koshi Pramandal?",
+   opts:["Supaul, Araria, Madhepura","Saharsa, Supaul, Madhepura","Saharsa, Madhubani, Supaul","Kishanganj, Saharsa, Supaul"],
+   ans:1,
+   exp:"Koshi Pramandal has 3 districts: Saharsa, Supaul, and Madhepura. This region is associated with the Koshi river, which is called 'Bihar's Sorrow' due to frequent flooding."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"How many districts are in Purnia Pramandal and which are they?",
+   opts:["3 — Purnia, Araria, Kishanganj","4 — Araria, Kishanganj, Purnia, Katihar","5 — Purnia, Araria, Kishanganj, Katihar, Saharsa","4 — Purnia, Araria, Supaul, Katihar"],
+   ans:1,
+   exp:"Purnia Pramandal has 4 districts: Araria, Kishanganj, Purnia, and Katihar. This is Bihar's northeastern division, bordering Nepal, West Bengal, and Jharkhand."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"Which 6 districts form Patna Pramandal?",
+   opts:["Patna, Nalanda, Bhojpur, Buxar, Kaimur, Rohtas","Patna, Nalanda, Gaya, Bhojpur, Buxar, Kaimur","Patna, Nalanda, Bhojpur, Rohtas, Arwal, Jehanabad","Patna, Buxar, Bhojpur, Saran, Siwan, Gopalganj"],
+   ans:0,
+   exp:"Patna Pramandal has 6 districts: Patna, Nalanda, Bhojpur, Buxar, Kaimur, and Rohtas. Patna, the state capital, is located in this division on the banks of the Ganga."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"Which 5 districts form Magadh Pramandal?",
+   opts:["Gaya, Aurangabad, Nawada, Jehanabad, Arwal","Gaya, Aurangabad, Nawada, Arwal, Nalanda","Gaya, Nawada, Jehanabad, Arwal, Rohtas","Gaya, Aurangabad, Nawada, Jehanabad, Banka"],
+   ans:0,
+   exp:"Magadh Pramandal has 5 districts: Gaya, Aurangabad, Nawada, Jehanabad, and Arwal. This region was the heartland of the ancient Magadha Empire and includes the historic city of Gaya."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"hard",
+   q:"Which 6 districts form Munger Pramandal?",
+   opts:["Munger, Jamui, Lakhisarai, Sheikhpura, Begusarai, Khagaria","Munger, Jamui, Lakhisarai, Sheikhpura, Bhagalpur, Banka","Munger, Jamui, Begusarai, Khagaria, Saharsa, Supaul","Munger, Lakhisarai, Sheikhpura, Begusarai, Nalanda, Banka"],
+   ans:0,
+   exp:"Munger Pramandal has 6 districts: Munger, Jamui, Lakhisarai, Sheikhpura, Begusarai, and Khagaria. This central-eastern division is located along the Ganga river."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"medium",
+   q:"Which Pramandal has the fewest districts (only 2) in Bihar?",
+   opts:["Koshi","Darbhanga","Saran","Bhagalpur"],
+   ans:3,
+   exp:"Bhagalpur Pramandal has only 2 districts: Bhagalpur and Banka. It is the smallest Pramandal in Bihar by number of districts. Bhagalpur is known for silk production (Tussar silk)."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"upsc",
+   q:"Which Bihar district is in Purnia Pramandal but also shares border with both West Bengal and Jharkhand?",
+   opts:["Araria","Purnia","Kishanganj","Katihar"],
+   ans:3,
+   exp:"Katihar is in Purnia Pramandal and uniquely shares borders with both West Bengal (east) and Jharkhand (south). It is also bordered by Purnia and is strategically significant due to its location near the Ganga and border regions."},
+
+  {topic:"bihar_gk",tn:"Bihar GK",level:"upsc",
+   q:"Arrange these in correct historical sequence: (A) Bihar-Odisha separation (B) Bihar province formation (C) Jharkhand creation (D) Delhi Durbar announcement",
+   opts:["A → B → C → D","D → B → A → C","B → D → A → C","D → A → B → C"],
+   ans:1,
+   exp:"Correct sequence: (D) 12 Dec 1911 Delhi Durbar announcement → (B) 1 April 1912 Bihar province formation → (A) 1 April 1936 Bihar-Odisha separation → (C) 15 Nov 2000 Jharkhand creation."},
+
+
+// ══════════════════════════════════════════════════════════════
+//  ADD THIS TOPIC ENTRY TO YOUR TOPICS_CFG ARRAY:
+//  {id:"bihar_gk", name:"Bihar: Samanya Parichay", icon:"🗺️", color:"#E3B341", cat:"cat_gs"},
+//
+//  TOTAL QUESTIONS ADDED: 62
+// ══════════════════════════════════════════════════════════════
+
   ════════════════════════════════════════════════════════ */
 
   // ── BT COTTON ──
