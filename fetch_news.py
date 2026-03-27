@@ -14,8 +14,9 @@ for url in FEEDS:
         feed = feedparser.parse(url)
         for entry in feed.entries[:3]:
             title = entry.get("title", "").strip()
+            link = entry.get("link", "").strip()
             if title and len(title) > 10:
-                news.append(title)
+                news.append({"title": title, "link": link})
     except:
         pass
 
@@ -29,7 +30,7 @@ js = f"""// Auto-generated — {date}
   if(dateEl) dateEl.textContent = '📅 {date}';
   if(!listEl) return;
   const NEWS = {json.dumps(news, ensure_ascii=False)};
-  listEl.innerHTML = NEWS.map(t => '<li>' + t + '</li>').join('');
+  listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 }})();
 """
 
