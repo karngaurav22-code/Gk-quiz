@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current Affairs | GS Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.ca-page { max-width: 800px; margin: 0 auto; padding: 24px 16px 60px; }
+.ca-page-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; margin-bottom: 6px; }
+.ca-page-date { color: var(--text2); font-size: 13px; margin-bottom: 28px; }
+.ca-news-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 3px solid #6366F1; border-radius: 12px;
+  padding: 16px 18px; margin-bottom: 12px;
+  font-size: 15px; line-height: 1.7; color: var(--text);
+}
+.ca-back { 
+  display: inline-block; margin-bottom: 20px;
+  color: var(--blue); font-size: 13px; 
+  text-decoration: none; font-weight: 600;
+}
+</style>
+</head>
+<body>
+<div class="ca-page">
+  <a class="ca-back" href="index.html">← Wapas Jao</a>
+  <div class="ca-page-title">📰 Aaj Ki Current Affairs</div>
+  <div class="ca-page-date" id="ca-page-date">Loading...</div>
+  <div id="ca-news-list">Loading...</div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/current-affairs.js"></script>
+<script>
+  const dateEl = document.getElementById('ca-page-date');
+  const listEl = document.getElementById('ca-news-list');
+  const today = new Date();
+  const options = {day:'2-digit', month:'long', year:'numeric'};
+  if(dateEl) dateEl.textContent = today.toLocaleDateString('hi-IN', options);
+
+  // current-affairs.js se news lo
+  setTimeout(()=>{
+    const items = document.getElementById('ca-items');
+    if(items && listEl){
+      const news = Array.from(items.querySelectorAll('li')).map(li => li.textContent);
+      if(news.length){
+        listEl.innerHTML = news.map(n => 
+          `<div class="ca-news-card">${n}</div>`
+        ).join('');
+      }
+    }
+  }, 500);
+</script>
+</body>
+</html>
