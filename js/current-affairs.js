@@ -1,9 +1,9 @@
-// Auto-generated — 28 March 2026
+// Auto-generated — 29 March 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 28 March 2026';
+  if(dateEl) dateEl.textContent = '📅 29 March 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "मोहम्मद बग़र ग़ालिबाफ़: ईरान के वो नेता जो अमेरिका के साथ बातचीत का नेतृत्व कर सकते हैं", "link": "https://www.bbc.com/hindi/articles/cd0rn5x7jpyo?at_medium=RSS&at_campaign=rss"}, {"title": "आईपीएल से शुरुआती दो हफ़्तों के लिए बाहर हो सकते हैं धोनी, क्या है कारण", "link": "https://www.bbc.co.uk/hindi/live/cwywdx9d4rdt?at_medium=RSS&at_campaign=rss"}, {"title": "बालेन शाह के पीएम बनते ही पूर्व प्रधानमंत्री केपी ओली और पूर्व गृह मंत्री रमेश लेखक गिरफ़्तार", "link": "https://www.bbc.com/hindi/articles/c36rw1z9eelo?at_medium=RSS&at_campaign=rss"}, {"title": "Amit Shah to release BJP's list of charges against TMC on March 28", "link": "https://www.thehindu.com/news/national/west-bengal/amit-shah-bjp-list-of-charges-against-tmc-march-28/article70795374.ece"}, {"title": "Tamil Nadu Assembly election 2026: Constituency Watch – a compilation", "link": "https://www.thehindu.com/elections/tamil-nadu-assembly/tamil-nadu-assembly-election-constituency-watch-a-package/article70761075.ece"}];
+  const NEWS = [{"title": "1973  का अरब-इसराइल युद्ध, जब सऊदी अरब ने लगाया था अमेरिका पर तेल प्रतिबंध जिससे 4 गुना बढ़ गए थे दाम", "link": "https://www.bbc.com/hindi/articles/c62lxjex097o?at_medium=RSS&at_campaign=rss"}, {"title": "दुनिया की सबसे बड़ी स्मेल्टर फ़ैक्ट्रियों में से एक एल्युमिनियम बहरीन पर हमला", "link": "https://www.bbc.co.uk/hindi/live/cgqk9g9lp7kt?at_medium=RSS&at_campaign=rss"}, {"title": "शनिवार को ऐसा क्या हुआ है जिससे मध्य-पूर्व का संकट और गंभीर हो गया", "link": "https://www.bbc.com/hindi/articles/ckgrd64q3g7o?at_medium=RSS&at_campaign=rss"}, {"title": "Breaks ensured I stay fresh and excited: Kohli", "link": "https://www.thehindu.com/sport/cricket/breaks-ensured-i-stay-fresh-and-excited-kohli/article70798827.ece"}, {"title": "Armstrong’s wife and AIADMK candidate A. Porkodi hopes to win Thiru.Vi.Ka. Nagar constituency", "link": "https://www.thehindu.com/elections/tamil-nadu-assembly/armstrongs-wife-and-aiadmk-candidate-a-porkodi-hopes-to-win-thiruvika-nagar-constituency/article70798786.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
