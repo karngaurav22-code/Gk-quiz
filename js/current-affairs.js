@@ -1,9 +1,9 @@
-// Auto-generated — 23 May 2026
+// Auto-generated — 24 May 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 23 May 2026';
+  if(dateEl) dateEl.textContent = '📅 24 May 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "गोवा से मुँह मोड़ रहे हैं विदेशी पर्यटक, श्रीलंका से मिल रही है कड़ी चुनौती", "link": "https://www.bbc.com/hindi/articles/cm2p8zygep7o?at_medium=RSS&at_campaign=rss"}, {"title": "चीन: कोयला खदान में हुआ धमाका, 82 लोगों की मौत", "link": "https://www.bbc.co.uk/hindi/live/c8e8g892yr1t?at_medium=RSS&at_campaign=rss"}, {"title": "कॉकरोच जनता पार्टी के संस्थापक अभिजीत दीपके के माता-पिता क्या चाहते हैं?", "link": "https://www.bbc.com/hindi/articles/cpqpw8l4zneo?at_medium=RSS&at_campaign=rss"}, {"title": "Ahead of SIR, 75% of voters mapped with 2003 rolls in Jharkhand: CEO", "link": "https://www.thehindu.com/news/national/jharkhand/ahead-of-sir-75-of-voters-mapped-with-2003-rolls-in-jharkhand-ceo/article71013598.ece"}, {"title": "U.S. Secretary of State Marco Rubio arrives in Kolkata, visits Saint Teresa’s Mother House", "link": "https://www.thehindu.com/news/national/us-secretary-of-state-marco-rubio-four-day-visit-to-india/article71013400.ece"}];
+  const NEWS = [{"title": "पाकिस्तान: बलूचिस्तान के क्वेटा में रेलवे ट्रैक पर धमाका, 7 लोगों की मौत", "link": "https://www.bbc.co.uk/hindi/live/c3r238rqg9nt?at_medium=RSS&at_campaign=rss"}, {"title": "गुरिंदरवीर सिंह कौन हैं, जो बन गए हैं भारत के सबसे तेज़ धावक", "link": "https://www.bbc.com/hindi/articles/c759krvdp92o?at_medium=RSS&at_campaign=rss"}, {"title": "ट्रंप ने ईरान के साथ समझौते को लेकर किया अहम दावा, होर्मुज़ स्ट्रेट को खोलने पर ये कहा", "link": "https://www.bbc.com/hindi/articles/c794jed31x1o?at_medium=RSS&at_campaign=rss"}, {"title": "What did the Supreme Court say about bail under UAPA?", "link": "https://www.thehindu.com/news/national/what-did-the-supreme-court-say-about-bail-under-uapa/article71014894.ece"}, {"title": "Falta repoll results LIVE: BJP takes commanding lead after eight rounds of counting", "link": "https://www.thehindu.com/elections/west-bengal-assembly/falta-west-bengal-repoll-vote-counting-results-may-24-2026/article71016885.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
