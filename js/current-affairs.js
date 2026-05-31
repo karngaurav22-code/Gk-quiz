@@ -1,9 +1,9 @@
-// Auto-generated — 30 May 2026
+// Auto-generated — 31 May 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 30 May 2026';
+  if(dateEl) dateEl.textContent = '📅 31 May 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "बशीर बद्र : 'घर जलाने वालों' को आईना दिखाने वाला अज़ीम शायर", "link": "https://www.bbc.com/hindi/articles/ce8p50lm2npo?at_medium=RSS&at_campaign=rss"}, {"title": "वैभव सूर्यवंशी क्यों टीम इंडिया की रेस में शुभमन गिल पर भारी पड़ रहे हैं", "link": "https://www.bbc.com/hindi/articles/c9v344wx7dwo?at_medium=RSS&at_campaign=rss"}, {"title": "वैभव सूर्यवंशी को लेकर अमिताभ बच्चन ने क्या कहा?", "link": "https://www.bbc.co.uk/hindi/live/cj4pkkq7nlqt?at_medium=RSS&at_campaign=rss"}, {"title": "Kerala Lok Ayukatha seeks powers to initiate Contempt of Court proceedings, draft rules pending for over one year", "link": "https://www.thehindu.com/news/national/kerala/kerala-lok-ayukatha-seeks-powers-to-initiate-contempt-of-court-proceedings-draft-rules-pending-for-over-one-year/article71037001.ece"}, {"title": "Belagavi City Corporation starts monsoon preparation work", "link": "https://www.thehindu.com/news/national/karnataka/belagavi-city-corporation-starts-monsoon-preparation-work/article71037917.ece"}];
+  const NEWS = [{"title": "'यहीं बड़े हुए, मां-बाप बने, बच्चों की शादी की लेकिन अब...' भारत से बांग्लादेश जा रहे लोग क्या कह रहे हैं?", "link": "https://www.bbc.com/hindi/articles/c1j24r44llpo?at_medium=RSS&at_campaign=rss"}, {"title": "अभिषेक बनर्जी पर हमले के मामले में पांच लोग गिरफ़्तार, पुलिस ने और क्या बताया", "link": "https://www.bbc.co.uk/hindi/live/czd2zvdd130t?at_medium=RSS&at_campaign=rss"}, {"title": "अभिषेक बनर्जी पर हमले के बाद ममता बनर्जी बोलीं- 'जान भी जा सकती थी'", "link": "https://www.bbc.com/hindi/articles/cr7pdn5g8ypo?at_medium=RSS&at_campaign=rss"}, {"title": "Para-athlete held for shooting dead national-level para-athlete Chirag Tyagi in Ghaziabad", "link": "https://www.thehindu.com/news/national/uttar-pradesh/para-athlete-chirag-tyagi-found-dead-in-ups-ghaziabad/article71043742.ece"}, {"title": "West Asia conflict to impact SAIL steel prices marginally: Official", "link": "https://www.thehindu.com/business/Industry/west-asia-conflict-to-impact-sail-steel-prices-marginally-official/article71043970.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
