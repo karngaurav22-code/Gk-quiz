@@ -1,9 +1,9 @@
-// Auto-generated — 31 May 2026
+// Auto-generated — 01 June 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 31 May 2026';
+  if(dateEl) dateEl.textContent = '📅 01 June 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "'यहीं बड़े हुए, मां-बाप बने, बच्चों की शादी की लेकिन अब...' भारत से बांग्लादेश जा रहे लोग क्या कह रहे हैं?", "link": "https://www.bbc.com/hindi/articles/c1j24r44llpo?at_medium=RSS&at_campaign=rss"}, {"title": "अभिषेक बनर्जी पर हमले के मामले में पांच लोग गिरफ़्तार, पुलिस ने और क्या बताया", "link": "https://www.bbc.co.uk/hindi/live/czd2zvdd130t?at_medium=RSS&at_campaign=rss"}, {"title": "अभिषेक बनर्जी पर हमले के बाद ममता बनर्जी बोलीं- 'जान भी जा सकती थी'", "link": "https://www.bbc.com/hindi/articles/cr7pdn5g8ypo?at_medium=RSS&at_campaign=rss"}, {"title": "Para-athlete held for shooting dead national-level para-athlete Chirag Tyagi in Ghaziabad", "link": "https://www.thehindu.com/news/national/uttar-pradesh/para-athlete-chirag-tyagi-found-dead-in-ups-ghaziabad/article71043742.ece"}, {"title": "West Asia conflict to impact SAIL steel prices marginally: Official", "link": "https://www.thehindu.com/business/Industry/west-asia-conflict-to-impact-sail-steel-prices-marginally-official/article71043970.ece"}];
+  const NEWS = [{"title": "आरसीबी की पारी के 16वें ओवर में विराट के साथ ऐसा क्या हुआ, जिसकी हो रही है चर्चा", "link": "https://www.bbc.com/hindi/articles/cd9p3de9zxko?at_medium=RSS&at_campaign=rss"}, {"title": "राष्ट्रपति पेज़ेश्कियान के इस्तीफ़े का दावा करने वाली ख़बरों पर ईरानी अफ़सरों ने क्या कहा?", "link": "https://www.bbc.co.uk/hindi/live/cx21z2ykld9t?at_medium=RSS&at_campaign=rss"}, {"title": "मर्लिन मुनरो का 100वाँ जन्मदिन: उनकी मौत को लेकर रहस्य क्यों है बरकरार?", "link": "https://www.bbc.com/hindi/articles/c62xe41nnlgo?at_medium=RSS&at_campaign=rss"}, {"title": "RCB’s second IPL crown sets Vizag’s Beach Road alight for Virat Kohli", "link": "https://www.thehindu.com/news/national/andhra-pradesh/rcbs-second-ipl-crown-sets-vizags-beach-road-alight-for-virat-kohli/article71046967.ece"}, {"title": "D.K. Shivakumar on IPL final not being played in Bengaluru", "link": "https://www.thehindu.com/shorts/dk-shivakumar-on-ipl-final-not-being-played-in-bengaluru/article71047422.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
