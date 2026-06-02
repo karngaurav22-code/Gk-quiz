@@ -1,9 +1,9 @@
-// Auto-generated — 01 June 2026
+// Auto-generated — 02 June 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 01 June 2026';
+  if(dateEl) dateEl.textContent = '📅 02 June 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "आरसीबी की पारी के 16वें ओवर में विराट के साथ ऐसा क्या हुआ, जिसकी हो रही है चर्चा", "link": "https://www.bbc.com/hindi/articles/cd9p3de9zxko?at_medium=RSS&at_campaign=rss"}, {"title": "राष्ट्रपति पेज़ेश्कियान के इस्तीफ़े का दावा करने वाली ख़बरों पर ईरानी अफ़सरों ने क्या कहा?", "link": "https://www.bbc.co.uk/hindi/live/cx21z2ykld9t?at_medium=RSS&at_campaign=rss"}, {"title": "मर्लिन मुनरो का 100वाँ जन्मदिन: उनकी मौत को लेकर रहस्य क्यों है बरकरार?", "link": "https://www.bbc.com/hindi/articles/c62xe41nnlgo?at_medium=RSS&at_campaign=rss"}, {"title": "RCB’s second IPL crown sets Vizag’s Beach Road alight for Virat Kohli", "link": "https://www.thehindu.com/news/national/andhra-pradesh/rcbs-second-ipl-crown-sets-vizags-beach-road-alight-for-virat-kohli/article71046967.ece"}, {"title": "D.K. Shivakumar on IPL final not being played in Bengaluru", "link": "https://www.thehindu.com/shorts/dk-shivakumar-on-ipl-final-not-being-played-in-bengaluru/article71047422.ece"}];
+  const NEWS = [{"title": "ट्रंप चाहते हैं कि जंग ख़त्म हो, लेकिन ईरान झुकने को क्यों तैयार नहीं", "link": "https://www.bbc.com/hindi/articles/c62dy03r4qzo?at_medium=RSS&at_campaign=rss"}, {"title": "दिल्ली के मुकुंदपुर इलाक़े में एलपीजी सिलेंडर फटने से एक मंज़िला मकान गिरा", "link": "https://www.bbc.co.uk/hindi/live/cj6pj9jye57t?at_medium=RSS&at_campaign=rss"}, {"title": "एयर इंडिया क्रैश में बेटे को खोने वाली मां का दर्द: 'वह हर जगह मेरे साथ रहता है दिन-रात'", "link": "https://www.bbc.com/hindi/articles/cp8pgmdmevqo?at_medium=RSS&at_campaign=rss"}, {"title": "Karnataka changes alcohol pricing | India’s first alcohol-based tax system explained", "link": "https://www.thehindu.com/videos/karnataka-changes-alcohol-pricing-india-first-alcohol-based-tax-system-explained/article71051521.ece"}, {"title": "Five new Supreme Court judges sworn in, strength increases to 37", "link": "https://www.thehindu.com/news/national/chief-justice-of-india-surya-kant-new-judges-to-supreme-court/article71050982.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
