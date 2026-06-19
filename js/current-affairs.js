@@ -1,9 +1,9 @@
-// Auto-generated — 18 June 2026
+// Auto-generated — 19 June 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 18 June 2026';
+  if(dateEl) dateEl.textContent = '📅 19 June 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "क्या अमेरिका ईरान को समझौते के बदले में 300 अरब डॉलर देगा?", "link": "https://www.bbc.com/hindi/articles/ckg5nw330rno?at_medium=RSS&at_campaign=rss"}, {"title": "पश्चिम बंगाल: हाई कोर्ट ने स्पीकर के फ़ैसले में नहीं किया हस्तक्षेप, ऋतब्रत बनर्जी बने रहेंगे विपक्ष के नेता", "link": "https://www.bbc.co.uk/hindi/live/cgl3xwdn58jt?at_medium=RSS&at_campaign=rss"}, {"title": "बढ़ती उम्र में भी फ़िट बने रहने के लिए करें ये एक्सरसाइज़", "link": "https://www.bbc.com/hindi/articles/cgk6dydg7e4o?at_medium=RSS&at_campaign=rss"}, {"title": "Lokesh to Tharoor on delimitation: ‘Expanding Lok Sabha a democratic necessity’", "link": "https://www.thehindu.com/news/national/andhra-pradesh/lokesh-to-tharoor-on-delimitation-expanding-lok-sabha-a-democratic-necessity/article71114725.ece"}, {"title": "Alert issued against Nipah in Kerala from April to September", "link": "https://www.thehindu.com/news/national/kerala/alert-issued-against-nipah-in-kerala-from-april-to-september/article70772258.ece"}];
+  const NEWS = [{"title": "राम मंदिर ट्रस्ट पर उठते सवालों के बीच, जानिए कौन हैं महासचिव चंपत राय?", "link": "https://www.bbc.com/hindi/articles/cy4ekvnzx41o?at_medium=RSS&at_campaign=rss"}, {"title": "लेबनान के मीडिया का दावा- समझौते के बावजूद इसराइल ने किया हमला, 16 लोग मारे गए", "link": "https://www.bbc.co.uk/hindi/live/ceqdg052l9jt?at_medium=RSS&at_campaign=rss"}, {"title": "टेलीग्राम पर लगी अस्थाई रोक जारी रहेगी: दिल्ली हाई कोर्ट का फ़ैसला", "link": "https://www.bbc.com/hindi/articles/c78y7w6xe90o?at_medium=RSS&at_campaign=rss"}, {"title": "The best mangoes in South India, according to farmers who grow them", "link": "https://www.thehindu.com/food/dining/the-best-mangoes-in-south-india-according-to-farmers-who-grow-them/article71079438.ece"}, {"title": "Kerala Budget: ‘Land Reforms 2.0’ for reviewing land laws, amending statutes", "link": "https://www.thehindu.com/news/national/kerala/kerala-budget-land-reforms-20-for-reviewing-land-laws-amending-statutes/article71121136.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
