@@ -1,9 +1,9 @@
-// Auto-generated — 30 July 2026
+// Auto-generated — 31 July 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 30 July 2026';
+  if(dateEl) dateEl.textContent = '📅 31 July 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "जेन ज़ी को 'गटर जेनरेशन' कहने के बाद कंगना रनौत ने दी सफ़ाई, पीएम मोदी के बारे में ये कहा?", "link": "https://www.bbc.com/hindi/articles/cg5lzevz1rro?at_medium=RSS&at_campaign=rss"}, {"title": "मध्य प्रदेश में किसानों का आंदोलन ख़त्म, सरकार से किन बातों पर समझौता", "link": "https://www.bbc.co.uk/hindi/live/c79gqleel3pt?at_medium=RSS&at_campaign=rss"}, {"title": "बीजेपी और एनडीए के इन नेताओं की बेटियां सीजेपी के आंदोलन के समर्थन में क्यों आईं?", "link": "https://www.bbc.com/hindi/articles/c4gwdqxpzx7o?at_medium=RSS&at_campaign=rss"}, {"title": "Centre’s assurance cannot override statutory processes governing withdrawal of FIRs, experts say", "link": "https://www.thehindu.com/news/national/centres-assurance-cannot-override-statutory-processes-governing-withdrawal-of-firs-experts-say/article71280825.ece"}, {"title": "Voting under way for Manjalpur byelection in Gujarat", "link": "https://www.thehindu.com/news/national/gujarat/manjalpur-byelection-in-gujarat-july-30-2026/article71284374.ece"}];
+  const NEWS = [{"title": "बांकीपुर उपचुनाव में 35 फ़ीसदी से भी कम मतदान प्रशांत किशोर के लिए क्या संकेत हैं?", "link": "https://www.bbc.com/hindi/articles/cd0xdzjvr0zo?at_medium=RSS&at_campaign=rss"}, {"title": "महाराष्ट्र : भिवंडी में चार मंजिला इमारत ढही, सात लोगों की मौत", "link": "https://www.bbc.co.uk/hindi/live/c4g3eg18k4jt?at_medium=RSS&at_campaign=rss"}, {"title": "मोरक्को से हज़ारों प्रवासी तैरकर स्पेन के स्यूटा एन्क्लेव पहुँचे, यूरोप में तीखी प्रतिक्रिया", "link": "https://www.bbc.com/hindi/articles/cz7dl7nxndro?at_medium=RSS&at_campaign=rss"}, {"title": "Veteran playback singer Jamuna Rani is no more", "link": "https://www.thehindu.com/news/national/tamil-nadu/veteran-playback-singer-jamuna-rani-is-no-more/article71289134.ece"}, {"title": "A 17-year-old fan, a rainy Mananchira night and a lifetime with Rafi Saab", "link": "https://www.thehindu.com/news/cities/kozhikode/a-17-year-old-fan-a-rainy-mananchira-night-and-a-lifetime-with-rafi-saab/article71287823.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
