@@ -1,9 +1,9 @@
-// Auto-generated — 18 August 2026
+// Auto-generated — 19 August 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 18 August 2026';
+  if(dateEl) dateEl.textContent = '📅 19 August 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "ट्रंप ने ज्ञानेश कुमार का ज़िक्र कर भारत की चुनाव व्यवस्था पर क्या कहा?", "link": "https://www.bbc.com/hindi/articles/cwyqz5q0ky4o?at_medium=RSS&at_campaign=rss"}, {"title": "मल्लिकार्जुन खड़गे बोले- मैं पहली बार विधायक बना तब अमित शाह बच्चे थे", "link": "https://www.bbc.co.uk/hindi/live/cmg4d9336p73t?at_medium=RSS&at_campaign=rss"}, {"title": "'ज़िंदगी खत्म करने के अलावा कोई विकल्प नहीं बचा था', त्विषा शर्मा केस में सीबीआई का चार्जशीट में दावा", "link": "https://www.bbc.com/hindi/articles/c74gkn9gpvdo?at_medium=RSS&at_campaign=rss"}, {"title": "CPI(M) slams BJP for lodging police complaints against ex-CM Manik Sarkar", "link": "https://www.thehindu.com/news/national/tripura/cpim-slams-bjp-for-lodging-police-complaints-against-ex-cm-manik-sarkar/article71358825.ece"}, {"title": "Dinakar questions Chidambaram on ‘Dimagi Naxalite’", "link": "https://www.thehindu.com/news/national/andhra-pradesh/dinakar-questions-chidambaram-on-dimagi-naxalite/article71356991.ece"}];
+  const NEWS = [{"title": "मोदी सरकार ने क्या बांग्लादेश के प्रधानमंत्री तारिक़ रहमान को धर्मसंकट में डाल दिया है?", "link": "https://www.bbc.com/hindi/articles/c1e1x7vdqzwo?at_medium=RSS&at_campaign=rss"}, {"title": "पश्चिम बंगाल: कोलकाता के होटल में भीषण आग, नौ लोगों की मौत", "link": "https://www.bbc.co.uk/hindi/live/cmvgw9l239pjt?at_medium=RSS&at_campaign=rss"}, {"title": "अखिलेश के 'पीडीए' की काट: बीजेपी की नई टीम में यूपी के लिए क्या संदेश है?", "link": "https://www.bbc.com/hindi/articles/cz7dz2n1j3yo?at_medium=RSS&at_campaign=rss"}, {"title": "U.S. Ambassador Sergio Gor to visit Kashmir, meet Omar Abdullah", "link": "https://www.thehindu.com/news/national/jammu-and-kashmir/us-ambassador-sergio-gor-to-visit-kashmir-meet-omar-abdullah/article71360482.ece"}, {"title": "Massive Kolkata hotel fire kills 9, several injured", "link": "https://www.thehindu.com/news/cities/kolkata/kolkata-hotel-fire-deaths-bangladesh-nationals-august-19-2026/article71363189.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
