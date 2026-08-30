@@ -1,9 +1,9 @@
-// Auto-generated — 29 August 2026
+// Auto-generated — 30 August 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 29 August 2026';
+  if(dateEl) dateEl.textContent = '📅 30 August 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "नेपाल बाढ़: इस घर की बालकनी में फँसे लोगों का क्या हुआ?", "link": "https://www.bbc.com/hindi/articles/clylkz466n2o?at_medium=RSS&at_campaign=rss"}, {"title": "चेन्नईः 19 महीने के बच्चे का अंगदान करने वाली मां ने फिर मुड़कर उसे नहीं देखा", "link": "https://www.bbc.com/hindi/articles/clyklzn2n28o?at_medium=RSS&at_campaign=rss"}, {"title": "आरएसएस प्रमुख मोहन भागवत का न्यूयॉर्क में प्रोग्राम और ममदानी के विरोध पर अमेरिकी मीडिया में कैसी बहस", "link": "https://www.bbc.com/hindi/articles/c5ymryxekpdo?at_medium=RSS&at_campaign=rss"}, {"title": "SFI Keralam unit calls Kanthapuram Samastha circular ‘anti-women’", "link": "https://www.thehindu.com/news/national/kerala/sfi-keralam-unit-calls-kanthapuram-samastha-circular-anti-women/article71403997.ece"}, {"title": "CM Naidu to visit Anantapur on August 30", "link": "https://www.thehindu.com/news/national/andhra-pradesh/cm-naidu-to-visit-anantapur-on-august-30/article71403551.ece"}];
+  const NEWS = [{"title": "रिज़र्वेशन हटाओ आंदोलन: क्या यह मुद्दा बीजेपी के गले की फाँस बन रहा है?", "link": "https://www.bbc.com/hindi/articles/c3wjex2n2xzo?at_medium=RSS&at_campaign=rss"}, {"title": "मोहन भागवत के हिंदू-मुस्लिम एकता वाले बयान पर बीजेपी ने क्या कहा?", "link": "https://www.bbc.co.uk/hindi/live/cmgjq6dd560lt?at_medium=RSS&at_campaign=rss"}, {"title": "इमरान ख़ान को लेकर क्या पाकिस्तान पर बढ़ रहा है अंतरराष्ट्रीय दबाव?", "link": "https://www.bbc.com/hindi/articles/cd68052nw00o?at_medium=RSS&at_campaign=rss"}, {"title": "Replacement of leaky pipes in western areas of Kochi to get priority", "link": "https://www.thehindu.com/news/cities/Kochi/replacement-of-leaky-pipes-in-western-areas-of-kochi-to-get-priority/article71407174.ece"}, {"title": "PM Modi joins yoga session in Uzbekistan", "link": "https://www.thehindu.com/news/international/pm-modi-joins-yoga-session-in-uzbekistan/article71407190.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
