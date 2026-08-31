@@ -1,9 +1,9 @@
-// Auto-generated — 30 August 2026
+// Auto-generated — 31 August 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 30 August 2026';
+  if(dateEl) dateEl.textContent = '📅 31 August 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "रिज़र्वेशन हटाओ आंदोलन: क्या यह मुद्दा बीजेपी के गले की फाँस बन रहा है?", "link": "https://www.bbc.com/hindi/articles/c3wjex2n2xzo?at_medium=RSS&at_campaign=rss"}, {"title": "मोहन भागवत के हिंदू-मुस्लिम एकता वाले बयान पर बीजेपी ने क्या कहा?", "link": "https://www.bbc.co.uk/hindi/live/cmgjq6dd560lt?at_medium=RSS&at_campaign=rss"}, {"title": "इमरान ख़ान को लेकर क्या पाकिस्तान पर बढ़ रहा है अंतरराष्ट्रीय दबाव?", "link": "https://www.bbc.com/hindi/articles/cd68052nw00o?at_medium=RSS&at_campaign=rss"}, {"title": "Replacement of leaky pipes in western areas of Kochi to get priority", "link": "https://www.thehindu.com/news/cities/Kochi/replacement-of-leaky-pipes-in-western-areas-of-kochi-to-get-priority/article71407174.ece"}, {"title": "PM Modi joins yoga session in Uzbekistan", "link": "https://www.thehindu.com/news/international/pm-modi-joins-yoga-session-in-uzbekistan/article71407190.ece"}];
+  const NEWS = [{"title": "शुद्धीकरण विवाद: राहुल गांधी के ख़िलाफ़ दर्ज हुई एफ़आईआर, जानिए क्या है मामला?", "link": "https://www.bbc.com/hindi/articles/c3v4pp0krx3o?at_medium=RSS&at_campaign=rss"}, {"title": "'एक साड़ी ने बचा ली कई ज़िंदगियां', नेपाल की बाढ़ में बचे एक जोड़े ने बताई पूरी कहानी", "link": "https://www.bbc.com/hindi/articles/c3reqe1vqqvo?at_medium=RSS&at_campaign=rss"}, {"title": "ई 20 मामला: सुप्रीम कोर्ट ने पेट्रोल पंपों पर इथेनॉल लेबलिंग अनिवार्य करने की मांग वाली याचिका ख़ारिज की", "link": "https://www.bbc.co.uk/hindi/live/c3ew952le2pwt?at_medium=RSS&at_campaign=rss"}, {"title": "Keralam Minister Bindu Krishna slams Kanthapuram’s directive on ‘restricting’ women at public events", "link": "https://www.thehindu.com/news/national/kerala/keralam-minister-bindu-krishna-slams-kanthapurams-directive-on-restricting-women-at-public-events/article71410080.ece"}, {"title": "Expect everybody to act in responsible manner: SC refuses to prohibit CJP’s September 5 protest march", "link": "https://www.thehindu.com/news/national/cockroach-janta-party-september-5-protest-supreme-court/article71410083.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
