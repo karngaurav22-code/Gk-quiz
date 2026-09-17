@@ -1,9 +1,9 @@
-// Auto-generated — 16 September 2026
+// Auto-generated — 17 September 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 16 September 2026';
+  if(dateEl) dateEl.textContent = '📅 17 September 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "यूपी से ग्राउंड रिपोर्ट: 'एक्सप्रेसवे प्रदेश' में नए एक्सप्रेसवे की ये कैसी हालत?", "link": "https://www.bbc.com/hindi/articles/cy8z564qzzlo?at_medium=RSS&at_campaign=rss"}, {"title": "किन यूपीआई ट्रांजैक्शन पर लगेगा चार्ज, किसे देना होगा, क्या फ्री होगा, जानें सभी ज़रूरी सवालों के जवाब", "link": "https://www.bbc.com/hindi/articles/cx5yl2d3v78zo?at_medium=RSS&at_campaign=rss"}, {"title": "शहबाज़ शरीफ़ ने मक्का पर 'ड्रोन हमले की कोशिश' को लेकर ये कहा", "link": "https://www.bbc.co.uk/hindi/live/cm93v1d6rw4pt?at_medium=RSS&at_campaign=rss"}, {"title": "What does the Defence Ministry’s annual report for 2025-26 say on Operation Sindoor and the LAC situation?", "link": "https://www.thehindu.com/news/national/what-does-the-defence-ministrys-annual-report-for-2025-26-say-on-operation-sindoor-and-the-lac-situation/article71471472.ece"}, {"title": "CMRL pay-off case: official retracts statement to ED", "link": "https://www.thehindu.com/news/national/kerala/cmrl-pay-off-case-official-retracts-statement-to-ed/article71471429.ece"}];
+  const NEWS = [{"title": "जिन्होंने एआई बनाया क्या अब वो उनकी क़ाबू से भी बाहर हो जाएगा?", "link": "https://www.bbc.com/hindi/articles/cqwyzgjlyznzo?at_medium=RSS&at_campaign=rss"}, {"title": "कांग्रेस ने भारत पर संभावित 100 फ़ीसदी टैरिफ़ पर कहा- \"तुष्टिकरण ने कभी लाभ नहीं दिया है और न ही कभी देगा\"", "link": "https://www.bbc.co.uk/hindi/live/cwg7ke9zgyplt?at_medium=RSS&at_campaign=rss"}, {"title": "ब्रिक्स समिट में भारत न आकर बांग्लादेश ने क्या अपना ही नुक़सान कर लिया?", "link": "https://www.bbc.com/hindi/articles/cqvgy8dv7e02o?at_medium=RSS&at_campaign=rss"}, {"title": "Keralam power crisis: Electricity consumption soars in September", "link": "https://www.thehindu.com/news/national/kerala/keralam-power-crisis-electricity-consumption-soars-in-september/article71475637.ece"}, {"title": "Assam begins commemorating Zubeen Garg’s first death anniversary", "link": "https://www.thehindu.com/news/national/assam/singer-zubeen-garg-first-death-anniversary-in-assam/article71475652.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
