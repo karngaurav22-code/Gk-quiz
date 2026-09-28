@@ -1,9 +1,9 @@
-// Auto-generated — 27 September 2026
+// Auto-generated — 28 September 2026
 (function(){
   const dateEl = document.getElementById('ca-date');
   const listEl = document.getElementById('ca-items');
-  if(dateEl) dateEl.textContent = '📅 27 September 2026';
+  if(dateEl) dateEl.textContent = '📅 28 September 2026';
   if(!listEl) return;
-  const NEWS = [{"title": "चुनाव आयोग का स्पष्टीकरण, फिर भी नहीं थम रहा एसआईआर विवाद, अब आगे क्या होगा? 5 बड़े सवाल", "link": "https://www.bbc.com/hindi/articles/cwe8ee87mlj2o?at_medium=RSS&at_campaign=rss"}, {"title": "भारत ने वेस्टइंडीज के ख़िलाफ़ टॉस जीतकर गेंदबाज़ी चुनी", "link": "https://www.bbc.co.uk/hindi/live/ck5ylllqvr2gt?at_medium=RSS&at_campaign=rss"}, {"title": "चीन के साथ ईरान का ये दांव, क्या अमेरिका के शिकंजे से उसे आज़ाद करा देगा?", "link": "https://www.bbc.com/hindi/articles/ckpq00rpd4v2o?at_medium=RSS&at_campaign=rss"}, {"title": "Palle Panduga 3.0 set to be launched to transform rural roads", "link": "https://www.thehindu.com/news/national/andhra-pradesh/palle-panduga-30-set-to-be-launched-to-transform-rural-roads/article71515376.ece"}, {"title": "Suvendu claims Mamata responsible for deletion of 27 lakh names in Bengal SIR, not BJP or ECI", "link": "https://www.thehindu.com/news/national/west-bengal/suvendu-claims-mamata-responsible-for-deletion-of-27-lakh-names-in-bengal-sir-not-bjp-or-eci/article71515437.ece"}];
+  const NEWS = [{"title": "अमेरिकी क़ानून में चीन को हथियार बेचने पर पाबंदी फिर भी उसे ये पेशकश क्यों?", "link": "https://www.bbc.com/hindi/articles/c69qrzeny3x5o?at_medium=RSS&at_campaign=rss"}, {"title": "कॉकरोच जनता पार्टी का एलान- 2 अक्तूबर से 'जेल भरो आंदोलन' करेंगे", "link": "https://www.bbc.co.uk/hindi/live/c8r4vye7g29vt?at_medium=RSS&at_campaign=rss"}, {"title": "उज्जैन में 650 साल पुरानी शाही मस्जिद के बाहर झड़प, सड़क चौड़ीकरण पर क्या है विवाद?", "link": "https://www.bbc.com/hindi/articles/cm4gd1e7plg8o?at_medium=RSS&at_campaign=rss"}, {"title": "Supreme Court cancels Shiv Sena corporator Ramesh Mhatre’s bail", "link": "https://www.thehindu.com/news/national/maharashtra/supreme-court-cancels-shiv-sena-corporator-ramesh-mhatres-bail/article71518988.ece"}, {"title": "Thunderstorms forecast in eight Telangana districts on September 29", "link": "https://www.thehindu.com/news/national/telangana/thunderstorms-forecast-in-eight-telangana-districts-on-september-29/article71518932.ece"}];
   listEl.innerHTML = NEWS.map(n => '<li><a href="' + n.link + '" target="_blank" style="color:inherit;text-decoration:none;">' + n.title + ' →</a></li>').join('');
 })();
